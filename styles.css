@@ -1,0 +1,131 @@
+header{
+    border: solid wheat;
+    width: 100vw;
+    height: 10vh;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: fantasy;
+}
+
+body{
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    border: solid antiquewhite;
+    width: 80vw;
+    height: 91vh;
+}
+
+.screen {
+    border: solid salmon;
+    background-color: black;
+    width: 80vw;
+    height: 60vh;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+.enemy{
+    border: solid forestgreen;
+    width: 30vw;
+    height: 60vh;
+    grid-column: 3;
+    justify-self: center;
+    background-size: 100% 100%;
+}
+
+.enemy:hover{
+    border: solid red;
+}
+
+.enemy1{
+    border: solid forestgreen;
+    width: 30vw;
+    height: 60vh;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    background-size: 100% 100%;
+}
+
+.enemy1:hover{
+    border: solid red;
+}
+
+.enemy2{
+    border: solid forestgreen;
+    width: 30vw;
+    height: 60vh;
+    grid-column: 4;
+    grid-row: 1;
+    justify-self: center;
+    background-size: 100% 100%;
+}
+
+.enemy2:hover{
+    border: solid red;
+}
+
+.textbox{
+    border: solid green;
+    color: aliceblue;
+    width: 70vw;
+    grid-column: 3;
+    grid-row: 5;
+    justify-self: center;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.actionBar {
+    border: solid brown;
+    width: 80vw;
+    height: 30vh;
+    display: flex;
+}
+
+.health{
+    border: solid peachpuff;
+    width: 20vw;
+    height: 30vh;
+}
+
+.actions{
+    border: solid peachpuff;
+    width: 45vw;
+    height: 30vh;
+}
+
+.attack{
+    width: 12vw;
+    font-size: 20px;
+}
+
+.attack:hover{
+    color: gold;
+}
+
+.inventory{
+    border: solid peachpuff;
+    width: 15vw;
+    height: 30vh;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 25% 25% 25% 25%;
+
+}
+
+#items{
+    width: 3vw;
+    height: 5vh;
+}
+
+.item1{
+    background-image: url(./assets/4896_kermitcoke.png);
+    background-size: 100% 100%;
+}

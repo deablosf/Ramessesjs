@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Ramesses</title>
+</head>
+
+<body>
+    <div id="combat" class="main">
+        <div class="screen">
+            <div id="ene1" class="enemy" onclick="enemySelect()"></div>
+            <div id="ene2" class="enemy1" onclick="enemySelect1()"></div>
+            <div id="ene3" class="enemy2" onclick="enemySelect2()"></div>
+            <div id="textbox" class="textbox"></div>
+        </div>
+        <div class="actionBar">
+            <div class="health"></div>
+            <div class="actions">
+                <button class="attack" onclick="attack(clubStrike)">Club strike</button>
+                <button class="attack" onclick="attack(violentThrust)">Violent Thrust</button>
+                <button class="attack" onclick="attack(ravanaBackHand)">Ravana BackHand</button>
+                <button class="attack" onclick="attack(thirstyBat)">Thirsty Bat</button>
+            </div>
+            <div class="inventory">
+                <div id="items" class="item1" onclick="attack(brownBetty)"></div>
+                <div id="items" class="item2" onclick="attack()"></div>
+                <div id="items" class="item3" onclick="attack()"></div>
+                <div id="items" class="item4" onclick="attack()"></div>
+            </div>
+                
+        </div>
+
+    </div>
+    <audio id="bonk" src="assets/Bonk.mp3"></audio>
+    <script src="app.js"></script>
+</body>
+</html>
