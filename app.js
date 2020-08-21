@@ -1,6 +1,9 @@
 // RAMESSES CODE!
-//INDEX
-//SECTION 01:  CHARACATER SHEETS
+// INDEX
+// SECTION 01: CHARACATER SHEETS
+// SECTION 02: RANDOM NUMBER GEN
+// Section 03: SFX
+// Section 04: Enemy Generator & Placement
 
 
 //--------------------- Section 01
@@ -28,9 +31,9 @@ const Ramesses = {
     bleeding: false,
     bleedingCounter: 0,
     inventory: {
-        brownBetty: 0,
-        superGlue: 0
-    }
+        brownBetty: 2,
+        superGlue: 1,
+    },
 };
 
 class Enemy {
@@ -120,7 +123,7 @@ const bossNames = [
 let seeFoo = ["Are you getting paid to be a punching bag or do you just like getting hit? Not judging if that’s what you’re into. Just thought you wanted to save someone.", "Was that your best hit? I thought you were trying to hurt them, not seduce them with light tickles and love taps.", "Any fight that they walk away from is another failure in your book. Worst student I ever had.", "I thought I taught you to win a fight you need to get hit less than the other guy, unless you’re trying to wear down his fists with your face.", "Is this for intimidation? Stand there and let them beat you until they are tired because it is futile?", " wouldn’t have done that but what do I know, I just taught you how to fight.", "Your body is strong and your brain is equally as weak. That means you’re stupid, BWAH HA HA HA.", "You know why they call it dead weight? If you try to lift it, you die too. Leave him. If he was weak enough to get caught, he is too weak for what’s coming."];
 
 
-// ------------------------
+// ------------------------ Section 02
 // ---------- Random Number gen --------
 // ------------------------
 
@@ -167,7 +170,7 @@ let randN0 = (max) => {
     // console.log(score);
 };
 
-// --------------------
+// -------------------- Section 03
 // --------------------- SFX 
 // --------------------
 
@@ -191,13 +194,15 @@ let damageAni = () => {
 
 let gameMessage = document.getElementById('textbox');
 
+let itemNumber = document.getElementById('itemnum');
+
 let bonk  = document.getElementById("bonk");
 let hitSFX = () => {
     bonk.play()
 }
 
-// -------------------------
-// ----------- Eneny Generator & Placement
+// ------------------------- Section 04
+// ----------- Enemy Generator & Placement
 // -------------------------
 
 let versus = [];
@@ -307,7 +312,10 @@ const thirstyBat = () => {
 const brownBetty = () => {
     if (Ramesses.health + 5 > Ramesses.orighealth){
         Ramesses.health = Ramesses.orighealth;
+        Ramesses.inventory.brownBetty -= 1;
         console.log("Healing has happened")
+    } else if (Ramesses.health == Ramesses.orighealth) {
+        gameMessage.innerText = "Already in top shape, not need to Over Do it."
     } else {
         Ramesses.health += 5;
     }
@@ -372,8 +380,6 @@ const badAi = () =>{
     
 }
 
-
-
 // --------------------
 // --------------- FIGHT LOOP
 // --------------------
@@ -410,6 +416,7 @@ let fight = () => {
     // document.getElementById("ooc").style.display="none";
     // document.getElementById("combat").removeAttribute("style");
     // document.getElementById("ene2").removeAttribute("style");
+    itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
     monsterGeny();
     if (versus.length == 2){
         enemyImage1.removeAttribute("style")
@@ -418,6 +425,7 @@ let fight = () => {
         enemyImage1.style.backgroundImage = versus[0].image;
         enemyImage2.style.backgroundImage = versus[1].image;
         gameMessage.innerText = versus[0].snaps[randN0(4)];
+        
     } else {
         enemyImage.removeAttribute("style");
         enemyImage1.style.display="none";
@@ -425,7 +433,7 @@ let fight = () => {
         enemyImage.style.backgroundImage = versus[0].image;
         gameMessage.innerText = versus[0].snaps[randN0(4)];  
     }
-        
+     
     }
 
 
@@ -435,6 +443,9 @@ const attack = (x) => {
         gameMessage.innerText = "Please Choose a Target";
         return
     }
+    // if (Ramesses.inventory.brownBetty > 1 && target == 1) {
+    //     gameMessage.innerText = "All out"
+    // }
     let attackButton = document.getElementsByClassName('attack')
     let continueButton = document.getElementById("continue-button"); 
     x(target)
@@ -483,9 +494,10 @@ const endFight = (message) => {
     document.getElementById("continue-button").hidden = false;
 }
 
+
 // ---------------------------
 // ------ GAME START ---------
 // ---------------------------
 
 
-//fight()
+fight()
