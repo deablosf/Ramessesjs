@@ -196,7 +196,34 @@ let gameMessage = document.getElementById('textbox');
 
 let itemNumber = document.getElementById('itemnum');
 
+let music = document.getElementById("flash");
+let battleMusic = document.getElementById("lines")
+let flOneBoss = document.getElementById("Rasputin")
+let roundabout = document.getElementById("coninued")
 let bonk  = document.getElementById("bonk");
+
+let grandMaster = () => {
+    battleMusic.pause()
+    music.play()
+    flOneBoss.pause()
+}
+let fightclub = () => {
+    music.pause()
+    battleMusic.play()
+}
+let flrOneBoss = () => {
+    flOneBoss.play()
+    battleMusic.pause()
+    music.pause()
+}
+let endsong = () => {
+    music.pause()
+    battleMusic.pause()
+    music.pause()
+    roundabout.play()
+    
+
+}
 let hitSFX = () => {
     bonk.play()
 }
@@ -314,10 +341,12 @@ const brownBetty = () => {
         Ramesses.health = Ramesses.orighealth;
         Ramesses.inventory.brownBetty -= 1;
         console.log("Healing has happened")
+        itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
     } else if (Ramesses.health == Ramesses.orighealth) {
         gameMessage.innerText = "Already in top shape, not need to Over Do it."
     } else {
         Ramesses.health += 5;
+        itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
     }
     console.log("Healing has happened")
 }
@@ -500,4 +529,3 @@ const endFight = (message) => {
 // ---------------------------
 
 
-fight()
