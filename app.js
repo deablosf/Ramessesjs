@@ -47,7 +47,7 @@ class Enemy {
         this.toler = odds(9),  //between 2 and 8
         this.health = eneHealth(25), // between 8 and 24
         this.aimBonus = 0,
-        this.actions = [attackR, aim, cocaine],
+        this.actions = [attackR, aim, cocaine, attackR],
         this.image = image,
         this.snaps = snaps,
         this.bleeding = false,
@@ -173,13 +173,21 @@ let randN0 = (max) => {
 // -------------------- Section 03
 // --------------------- SFX 
 // --------------------
-
+// ----------------- Visual
+let combatScreen = document.getElementById('screen');
 let enemyImage = document.getElementById('ene1');
 let enemyImage1 = document.getElementById('ene2');
 let enemyImage2 = document.getElementById('ene3');
+let gameMessage = document.getElementById('textbox');
+let itemNumber = document.getElementById('itemnum');
+let healthNumber = document.getElementById('healthNum');
+
+//element.classList.add("my-class");
+//element.classList.remove("my-class");
+
 
 let damageAni = () => {
-    hitSFX()
+    hitSFX1()
     enemyImage.style.border = "solid red";
     setTimeout(() => {
             enemyImage.style.border = "none";
@@ -190,17 +198,30 @@ let damageAni = () => {
     setTimeout(() => {
             enemyImage.style.border = "none";
             }, 375);
-    }
+}
 
-let gameMessage = document.getElementById('textbox');
+let damagedAni = () => {
+    combatScreen.classList.add("screen")
+    setTimeout(() => {
+        combatScreen.classList.remove("screen")
+    }, 500);
+}
 
-let itemNumber = document.getElementById('itemnum');
+// ------------- AUDIO
 
 let music = document.getElementById("flash");
-let battleMusic = document.getElementById("lines")
-let flOneBoss = document.getElementById("Rasputin")
-let roundabout = document.getElementById("coninued")
-let bonk  = document.getElementById("bonk");
+let battleMusic = document.getElementById("lines");
+let flOneBoss = document.getElementById("Rasputin");
+let roundabout = document.getElementById("coninued");
+let whap  = document.getElementById("whap");
+let snort = document.getElementById('snort');
+let strike1 = document.getElementById('strike1');
+let strike2 = document.getElementById('strike2');
+let strike3  = document.getElementById("bonk");
+let glassBreak = document.getElementById('glassBreak');
+let aiming = document.getElementById('aiming');
+let miss1 = document.getElementById('miss1')
+let miss2 = document.getElementById('miss2')
 
 let grandMaster = () => {
     battleMusic.pause()
@@ -224,8 +245,36 @@ let endsong = () => {
     
 
 }
-let hitSFX = () => {
-    bonk.play()
+let hitSFX1 = () => {
+    whap.play()
+}
+let hitSFX2 = () => {
+    strike1.play()
+}
+let hitSFX3 = () => {
+    strike2.play()
+}
+let hitSFX4 = () => {
+    strike3.play()
+}
+let missSFX1 = () => {
+    miss1.play()
+}
+let missSFX2 = () => {
+    miss2.play()
+}
+let snortSFX = () => {
+    snort.play()
+}
+let aimingSFX = () => {
+    aiming.play()
+}
+
+let damagedSFX = () => {
+    let hits = [hitSFX2, hitSFX3, hitSFX4];
+    let picker = hits.length +1;
+    let i = randN(picker) -1;
+    hits[i]()
 }
 
 // ------------------------- Section 04
@@ -275,12 +324,13 @@ let enemySelect2 = () => {
 const clubStrike = () => { // Normal Player attack
     let swingAway = 1 + randN(Ramesses.combat)
     if (swingAway >= target.athl/2){
-        target.health -= (4 + randN(Ramesses.str));
+        target.health -= (2 + randN(Ramesses.str));
         damageAni()
         gameMessage.innerText = "Direct Hit! Enemy Health: " + target.health;
         Ramesses.athl = Ramesses.origathl; 
     } else {
         gameMessage.innerText = "Missed";
+        missSFX1()
     }
     target = 1;
 }
@@ -295,16 +345,15 @@ const violentThrust = () => {  // lowers next attacks damage by 6 but adds athl 
             gameMessage.innerText = "Struck True! Enemy Health: " + target.health;
             damageAni()
         }, 1000);
-        setTimeout(() => {  
         Ramesses.athl -= 5;
         Ramesses.str = Ramesses.origstr;
-        }, 1000);
     } else {
+        gameMessage.innerText = "You get low, low-rider, turning your legs into high tention spring and let loose, launchin' yourself parallel to the floor right at that sucka!";
         setTimeout(() => {
             Ramesses.athl -= 5;
-        gameMessage.innerText = "You get low, low-rider, turning your legs into high tention spring and let loose, launchin' yourself parallel to the floor right at that sucka!";
+            gameMessage.innerText = " Only to miss ...";
+            missSFX1()
         }, 1000);
-        gameMessage.innerText = " Only to miss ...";
     }
     target = 1;
 }
@@ -319,7 +368,8 @@ const ravanaBackHand = () => { //multiple attacks 拉瓦那的反手, less chanc
         }
     
     } else {
-        gameMessage.innerText = "Way to swing mighty Casey"  
+        missSFX1()
+        gameMessage.innerText = "Way to swing mighty Casey"  ;
 }
 target = 1;
 }
@@ -332,23 +382,57 @@ const thirstyBat = () => {
         gameMessage.innerText = "Doing the impossible you're blunt bat has drawn blood! Enemy Health: " + target.health;
     } else {
         gameMessage.innerText = "Missed";
+        missSFX1()
     }
     target = 1;
 }
 
-const brownBetty = () => {
-    if (Ramesses.health + 5 > Ramesses.orighealth){
+const usedItem = () => {
+    gameMessage.innerText = "Item used ";
+    target = 1;
+    document.getElementById("ene1").style.border = "none";
+    document.getElementById("ene2").style.border = "none";
+    document.getElementById("ene2").style.border = "none";
+    streetSweeper()
+
+    setTimeout(() => {
+        gameMessage.innerText = "opponent is about to strike!"
+    }, 1250);
+    setTimeout(() => {
+        badAi()
+        streetSweeper()
+        if (isGameOver(Ramesses.health)) {
+            endgame("game Over")
+        return
+        }
+    }, 2000);
+    if (Ramesses.bleeding == true) {
+        Ramesses.health -= Math.floor(Ramesses.tough / 2)
+        gameMessage.innerText = "Your losing blood " + Ramesses.health;
+    };
+}
+
+const brownBetty = (x) => {
+    if (Ramesses.health == Ramesses.orighealth){
+        gameMessage.innerText = "Already in top shape, not need to Over Do it."
+        console.log()
+    } else if (Ramesses.health + 5 > Ramesses.orighealth) {
+        snortSFX()
         Ramesses.health = Ramesses.orighealth;
         Ramesses.inventory.brownBetty -= 1;
         console.log("Healing has happened")
         itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
-    } else if (Ramesses.health == Ramesses.orighealth) {
-        gameMessage.innerText = "Already in top shape, not need to Over Do it."
+        healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+        x()  
     } else {
+        snortSFX()
+        Ramesses.inventory.brownBetty -= 1;
         Ramesses.health += 5;
         itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
+        healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+        console.log("Healing has happened")
+        x()
     }
-    console.log("Healing has happened")
 }
 
 const superGlue = () => {
@@ -360,51 +444,63 @@ const attackR = (x) => {
     
     let strikechance = x.aimBonus + randN(x.combat);
     if (strikechance >= Ramesses.athl/2){
+        damagedAni()
+        damagedSFX()
         setTimeout(() => {
             Ramesses.health -= (2 + randN(x.str));
         x.aimBonus = 0;
         gameMessage.innerText = x.name + "'s attack hit " + "Ramess health: " + Ramesses.health; 
+        healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
         console.log("attack happened")
-        }, 2000);
+        }, 750);
         
     } else {
         setTimeout(() => {
             x.aimBonus = 0;
-        gameMessage.innerText = x.name + " Missed, Now's your chance!";
-        console.log("missed happened")
-        }, 2500);   
+            gameMessage.innerText = x.name + " Missed, Now's your chance!";
+            missSFX2()
+            console.log("missed happened")
+        }, 1000);   
     }      
 }
 
 const aim = (x) => {
     setTimeout(() => {
+        aimingSFX()
         x.aimBonus +=2;
         gameMessage.innerText = "Looks like " + x.name + " is taking aim!  " + x.aimBonus;
         console.log("aim happened")
-    }, 1500); 
+    }, 1000); 
 }
 
 const cocaine = (x) => {
     setTimeout(() => {
+        snortSFX()
         x.combat += 2;
         x.str += 2;
         x.health += 5;
         gameMessage.innerText = x.name + " took a bump!"
-    }, 1500);
+        console.log("Bump!!")
+    }, 800);
 }
 
 const badAi = () =>{
+    let delay = (y) => {
+        setTimeout(() => {
+            let picker = versus[y].actions.length +1;
+            let i = randN(picker) -1;
+            versus[y].actions[i](versus[y])
+            console.log(y)
+        }, 1000 + (1700 * y));
+    }
     for (y = 0; y < versus.length; y++) {
         if (versus[y].bleeding == true){
             console.log(versus[y].name + " is Bleeding!")
             versus[y].health -= (2)
             gameMessage.innerText = versus[y].name + " is Bleeding! " + versus[y].health;        
         };
-        
-            let picker = versus[y].actions.length +1;
-            let i = randN(picker) -1;
-            versus[y].actions[i](versus[y])
-            console.log(y)
+       delay(y)
+            
     }
     
 }
@@ -418,6 +514,7 @@ const isGameOver = (health) => {
 }
 
 const streetSweeper = () => {
+    healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     if (versus.length == 1) {
         if (isGameOver(versus[0].health)){
                 endFight("Ramesses Wins")
@@ -446,6 +543,7 @@ let fight = () => {
     // document.getElementById("combat").removeAttribute("style");
     // document.getElementById("ene2").removeAttribute("style");
     itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
+    healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     monsterGeny();
     if (versus.length == 2){
         enemyImage1.removeAttribute("style")
@@ -491,7 +589,7 @@ const attack = (x) => {
 
     setTimeout(() => {
         gameMessage.innerText = "opponent is about to strike!"
-    }, 2500);
+    }, 1250);
     setTimeout(() => {
         badAi()
         streetSweeper()
@@ -499,7 +597,7 @@ const attack = (x) => {
             endgame("game Over")
         return
         }
-    }, 4000);
+    }, 2000);
     if (Ramesses.bleeding == true) {
         Ramesses.health -= Math.floor(Ramesses.tough / 2)
         gameMessage.innerText = "Your losing blood " + Ramesses.health;
@@ -529,3 +627,4 @@ const endFight = (message) => {
 // ---------------------------
 
 
+fight()

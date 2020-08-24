@@ -14,15 +14,22 @@ body{
     align-items: center;
 }
 
+/* ____________________ COMBAT SCREEN _________________ */
+
 .main{
     border: solid antiquewhite;
     width: 80vw;
     height: 91vh;
 }
 
-.screen {
+#screen {
     border: solid salmon;
     background-color: black;
+    background-image: url(assets/BG4.jpg);
+    background-color: darkblue;
+    background-blend-mode: darken;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     width: 80vw;
     height: 60vh;
     display: grid;
@@ -72,7 +79,8 @@ body{
 }
 
 .textbox{
-    border: solid green;
+    border: solid silver;
+    background-color: blue; opacity: 0.8;
     color: aliceblue;
     width: 70vw;
     grid-column: 3;
@@ -93,17 +101,32 @@ body{
     border: solid peachpuff;
     width: 20vw;
     height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 600;
+    background-image: url(assets/doubt_griff.jpg);
+    background-size: 100% 100%;
+    background-color: gold;
+    background-blend-mode: darken;
 }
 
 .actions{
     border: solid peachpuff;
     width: 45vw;
     height: 30vh;
+    background-image: url(assets/focus_graff.jpeg);
+    background-size: 100% 100%;
+    background-color: gold;
+    background-blend-mode: darken;
+    display: flex;
+    flex-direction: column;
 }
 
 .attack{
     width: 12vw;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .attack:hover{
@@ -114,6 +137,10 @@ body{
     border: solid peachpuff;
     width: 15vw;
     height: 30vh;
+    background-image: url(assets/explore_graf.jpeg);
+    background-size: 100% 100%;
+    background-color: gold;
+    background-blend-mode: darken;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 25% 25% 25% 25%;
@@ -132,6 +159,10 @@ body{
     grid-row: 1;
 }
 
+.item1:hover{
+    border: solid gold;
+}
+
 .item1Num{
     font-size: 20px;
     font-weight: 800;
@@ -141,3 +172,30 @@ body{
     width: 3vw;
     height: 5vh;
 }
+
+
+
+
+/* __________________ ANIMATIONS ____________________ */
+
+.screen{
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+  
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+  }
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }

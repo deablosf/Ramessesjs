@@ -9,7 +9,7 @@
 
 <body>
     <div id="combat" class="main">
-        <div class="screen">
+        <div id="screen">
             <div id="ene1" class="enemy" onclick="enemySelect()"></div>
             <div id="ene2" class="enemy1" onclick="enemySelect1()"></div>
             <div id="ene3" class="enemy2" onclick="enemySelect2()"></div>
@@ -18,6 +18,9 @@
         <div class="actionBar">
             <div class="health">
                 <div id="healthcnt">Health</div>
+                <div id="healthNum"></div>
+                
+                <div id="" class="">Status effect</div>
             </div>
             <div class="actions">
                 <button class="attack" onclick="attack(clubStrike)">Club strike</button>
@@ -26,7 +29,7 @@
                 <button class="attack" onclick="attack(thirstyBat)">Thirsty Bat</button>
             </div>
             <div class="inventory">
-                <div id="items" class="item1" onclick="attack(brownBetty)"></div>
+                <div id="items" class="item1" onclick="brownBetty(usedItem)"></div>
                 <div id="itemnum" class="item1Num"></div>
                 <div id="items" class="item3" onclick="attack()"></div>
                 <div id="items" class="item4" onclick="attack()"></div>
@@ -41,10 +44,15 @@
     <audio id="Rasputin" src="assets/Rasputin.mp3"></audio>
     <audio id="coninued" src="assets/roundabout.mp3"></audio>
     <audio id="bonk" src="assets/Bonk.mp3"></audio>
-    <audio></audio>
-    <audio></audio>
-    <audio></audio>
-    <audio></audio>
+    <audio id="whap" src="assets/whap.mp3"></audio>
+
+    <audio id="strike1" src="assets/Fist Punch 3.mp3 by CGEffex.mp3"></audio>
+    <audio id="strike2" src="assets/Fist Punch or kick by rcroller.mp3"></audio>
+    <audio id="glassBreak" src="assets/Glass Break by unfa.mp3"></audio>
+    <audio id="snort" src="assets/Coke snort.mp3"></audio>
+    <audio id="aiming" src="assets/Night-Vision-Binoculars.mp3"></audio>
+    <audio id="miss1" src="assets/miss1.mp3"></audio>
+    <audio id="miss2" src="assets/miss2.mp3"></audio>
     <script src="app.js"></script>
 </body>
 </html>
