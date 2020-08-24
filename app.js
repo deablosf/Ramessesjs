@@ -360,13 +360,18 @@ const violentThrust = () => {  // lowers next attacks damage by 6 but adds athl 
 
 const ravanaBackHand = () => { //multiple attacks 拉瓦那的反手, less chance of hitting after each strike. maybe a for loop
     let swingAway = 1 + randN(Ramesses.combat)
-    if (swingAway > target.athl/2) {
-        for (i = swingAway; i > target.athl/2; i --) {
+    let delay = (i) => {
+        setTimeout(() => {
             damageAni()
             gameMessage.innerText = "Hit!" + i;
             target.health -= (1 + randN(Ramesses.str));
+        }, 500);
+    }
+    console.log(swingAway)
+    if (swingAway > target.athl/2) {
+        for (i = swingAway; i > target.athl/2; i -= 2) {
+            delay(i)
         }
-    
     } else {
         missSFX1()
         gameMessage.innerText = "Way to swing mighty Casey"  ;
@@ -435,7 +440,7 @@ const brownBetty = (x) => {
     }
 }
 
-const superGlue = () => {
+const bandage = (X) => {
 
 }
 
