@@ -173,7 +173,7 @@ let randN0 = (max) => {
 // -------------------- Section 03
 // --------------------- SFX 
 // --------------------
-// ----------------- Visual
+// ----------------- Visuals (Combat)
 let combatScreen = document.getElementById('screen');
 let enemyImage = document.getElementById('ene1');
 let enemyImage1 = document.getElementById('ene2');
@@ -181,6 +181,29 @@ let enemyImage2 = document.getElementById('ene3');
 let gameMessage = document.getElementById('textbox');
 let itemNumber = document.getElementById('itemnum');
 let healthNumber = document.getElementById('healthNum');
+
+// ----------------- Visuals (OOC)
+const textElement = document.getElementById('text');
+const optionButtonsElement = document.getElementById('selectBox')
+
+const roomRevisit = () => {
+    if (nextTextNodeId == 9) {
+        if (firstRoom == false) {
+            setTimeout(() => {
+                npcs[0].style.backgroundImage = "url('assets/Ruby.jpg')"
+            }, 2000);
+        } else {
+            npcs[0].style.backgroundImage = "url('assets/Ruby.jpg')";
+            textNodes[9].text = "What?! Think you're so badass, beating up some gang members and burning down an arcade?! you ain't Nothing! Weird ass kung fu turkey ...";
+        }
+    } 
+    if (nextTextNodeId == 10) {
+        if (secondRoom == true) {
+            textNodes[10].text = "Nothing left to do here.";
+            textNodes[10].options[0].text =  "Back to the Hallway"
+    }
+    
+}
 
 //element.classList.add("my-class");
 //element.classList.remove("my-class");
@@ -626,6 +649,302 @@ const endFight = (message) => {
     document.getElementById("continue-button").hidden = false;
 }
 
+// ---------------------
+// --------------- TEXT ADVENTURE
+// --------------------
+
+let state = {
+    firstRoom: false,
+    secondRoom: false,
+    thirdRoom: false
+}
+
+const startGame = () => {
+    state = {
+        firstRoom: false,
+        secondRoom: false,
+        thirdRoom: false
+    }
+    showTextNode(1)
+}
+
+
+
+let showTextNode = (textNodeIndex) => {
+    const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
+    textElement.innerText = textNode.text
+    while (optionsButonsElement.firstChild) {
+        optionsButonsElement.removeChild(optionButtonsElement.firstChild)
+    }
+
+    textNode.options.forEach(option => {
+        if (showOption(option)) {
+            const button = document.createElement('button')
+            button.innerText= option.text
+            button.classList.add('btn')
+            button.addEventListener('click', () => selectOption(option))
+            optionButtonsElement.appendChild(button)
+        }
+    })
+    if (textNode.sideEffect) {
+        textNode.sideEffect();
+    }                                                                                                                       
+}
+
+const showOption = (option) => {
+    return option.requiredState == null || option.requiredState(state)
+}
+
+const selectOption = (option) => {
+    const nextTextNodeId = option.nextText
+    if (nextTextNodeId <= 0) {
+        return startGame()
+    }
+    state = Object.assign(state, option.setState)
+    showTextNode(nextTextNodeId)
+}
+
+const textNodes = [
+    {
+        id: 1,
+        text: "The Bronx was no peaceful farm town but it was home. Ramesses the Bold and his brothers from the orphanage-dojo enjoyed their lives together until the Di Trullio crime family let greed make their choices for them. New faces roamed the streets, criminals from all over visiting and accepting the Di Trullio hospitality.",
+        options: [
+            {
+                text: 'Continue',
+                nextText: 2
+            }
+        ]
+    },
+    {
+        id: 2,
+        text: "These outsiders didn’t know the Bronx, didn’t care for the people, took what they wanted and all was forgiven; if they paid off the Di Trullio’s. The streets are reaching a braking point and now enters the straw. A gang of jive turkeys from upstate have provoked the wrong Mofo. They have taken one of Ramesses’ oath brothers, Eclipse. Eclipse has a sharp tongue and not enough sense to sheath it, so it's easy to figure out why they snatched him.",
+        options: [
+            {
+                text: "Continue",
+                //requiredState: (currentState) => currentState.blueGoo,
+                //setState: {bluegoo: false, sword: true },
+                nextText: 3
+            },
+            // {
+            //     text: 'Trade the goo for a shield',
+            //     requiredState: (currentState) => currentState.blueGoo,
+            //     setState: {bluegoo: false, shield: true },
+            //     nextText: 3
+            // },
+            
+        ]
+    },
+    {
+        id: 3,
+        text: "Their dojo Master Teacher See Foo commands Ramesses and his remaining oath brother, “Anchor of the Unmoored kingdom“ to stay in the orphanage dojo; “Anyone weak enough to be taken deserves their fate” he says.",
+        sideEffect: () => {
+            npcs[0].style.backgroundImage = "url('assets/Shifu.jpg')"
+            npcs[0].style.opacity = "0.6";
+        },
+        options: [
+            {
+                text: "Continue",
+                nextText: 4
+            }
+        ]
+    },
+    {
+        id: 4,
+        text: "Ignoring their master’s words, the two of them head to the abandoned Harriet Stowe Housing community or what the local’s called “Tomny’s Projects”. They will face off against the Raptures Wronged to get their brother back or die trying. Ramesses- 'I told you that you didn’t have to come, see foo’s gonna come down on me for this'.",
+        sideEffect: () => {
+            npcs[0].style.backgroundImage = "none"
+            bGI[0].style.backgroundImage = "url('assets/mainbuilding.png')";
+        },
+        options: [
+            {
+                text: "Continue",
+                nextText: 5
+            }
+        ]
+    },
+    {
+        id: 5,
+        text: "Anchor- 'You knew I wasn’t going to listen to your punk ass'. The two oath brothers stand at the heavy metal magnetically locked door of the project building. As they prepare to enter the building, the sound of vehicles pulling up draws their attention. Members of the Raptures Wronged slowly stepped out of the cars and off motorcycles. As the two prepare to face them, a buzzing comes from the door.",
+        sideEffect: () => {
+            bGI[0].style.backgroundImage = "url('assets/greydoor.png')"
+            bGI[0].style.backgroundColor = "brown"
+            
+        },
+        options: [
+            {
+                text: "Continue",
+                nextText: 6
+            }
+        ]
+    },
+    {
+        id: 6,
+        text: "Anchor- 'Go, get Eclipsing Moon. I’ll keep your back free and clear'. The Rapture's Wronged- 'Get away from tha do-'. Unmoored Anchor leaps onto the mass of thugs. With steel nerves, you open the building security door and walk away from the sounds of fists and screams. You cannot let doubt slow you down now. Trusting in the oath you three swore at your Master Teacher See Foo's Dojo, you enter the lair of the Rapture's Wronged.",
+        sideEffect: () => {
+            fight()  
+        },
+        options: [
+            {
+                text: "Continue",
+                nextText: 7
+            }
+        ]
+    },
+    {
+        id: 7,
+        text: "Stretched out before you is the broken down lobby of the project building. A wall of what was once mailboxes to your right and a graffiti covered wall to your left. In front of you, a second security door that is folded in on itself like cardboard. Past the door is a wider space, an elevator bay; bombed with graffiti from squatters long gone.",
+        sideEffect: () => { // place the elevator backgroound
+            bGI[0].style.backgroundImage = "url('assets/BGe.png')"
+        },
+        options: [
+            {
+                text: "Continue",
+                nextText: 8
+            }
+        ]
+    },
+    {
+        id: 8,
+        text: "A winding staircase of faux marble is covered with a layer of dust with footprints marking the passing of people and of the five apartments on this first floor only three of them have doors.",
+        sideEffect: () => {
+            bGI[0].style.backgroundImage = "url('assets/BG5.jpg')";
+            npcs[0].style.backgroundImage = "none";
+        },
+        options:[
+            {
+                text: "Door One",
+                nextText: 9
+            },
+            {
+                text: "Door Two",
+                nextText: 10
+            },
+            {
+                text: "Door Three",
+                nextText: 15
+            }
+        ]
+    },
+    {
+        id: 9,
+        text: "Ramesses~What kind of jive ass, silly, sad sack, narrow assed attempt at security is this?~ you think as you press the door open with your bat. Inside the bombed out room a woman sits on stacks of magazine, she looks up startled when you enter. Ruby~ Who are you?!",
+        sideEffect: () => { // add first person 
+            bGI[0].style.backgroundImage = "url('assets/floor1R1.jpg')"
+            npcs[0].style.opacity = "1.0";
+            
+            setTimeout(() => {
+                npcs[0].style.backgroundImage = "url('assets/Ruby.jpg')"
+            }, 2000);
+        },
+        options: [
+            {
+                text: "I'm a new member", // I know all the members because I give them their tats
+                nextText: 13
+            },
+            {
+                text: "I am Ramesses.", // You say it like it means something.
+                nextText: 13
+            },
+            {
+                text: "close door and walk away",
+                nextText: 8
+
+            }
+        ]
+    },
+    {
+        id: 10,
+        text: "The sounds of vermin attempting to get away from you as you force open the door alerts you to the fact that you’re not alone here. The vermin whips around with weapon in hand. That punk Eclipse said somebody would be dumb enough to try and save him. ",
+        sideEffect: () => {
+            bGI[0].style.backgroundImage = "url('assets/room2.jpg')"
+        },
+        options: [
+            {
+                text: "Where Is Eclipse!",
+                nextText: 11
+            }
+        ]
+    },
+    {
+        id: 11,
+        text: "Now you know you're in the right place. Don't know if Eclipse's fat mouth is still shooting off. But they're all gonna pay for their Transgressions. ",
+        sideEffect: () => {
+            fight()
+        },
+        options: [
+            {
+                text: "Search the room and the knocked out sucka",
+                nextText: 12
+            },
+            {
+                text: "Go back to the Hallway",
+                nextText: 8
+            }
+        ]
+    },
+    {
+        id: 12,
+        text: "Nothing of use in this wreckage but the punk on the floor had a pocket full of candy.",
+        options: [
+            {
+                text: "Back to hallway",
+                nextText: 8
+            }
+        ]
+    },
+    {
+        id: 13,
+        text: "Wait a minute, I know who you are! Your the asshole that burned down Grustigies Arcade! HE'S IN HERE! ",
+        options: [
+            {
+                text: "Fight",
+                nextText: 14
+            }
+        ]
+    },
+    {
+        id: 14,
+        text: "Ruby ran out while you fighting. Don't worry, the arcade wasn't entirely your fault.",
+        sideEffect: () => {
+            npcs[0].style.backgroundImage = "none"
+            fight()
+        },
+        options: [
+            {
+                text: "Back tothe hallway",
+                nextText: 8
+            }
+        ]
+    },
+    {
+        id: 15,
+        text: "After beating the brakes off that handy capable sucka you find the keys to the stairwell. Perfect place, no one would ever think he'd be the one with the keys. One floor down not sure how many to go. But you're damn sure they know you're coming and they better be ready. Cause when Ramesses comes, he comes hard.",
+        sideEffect: () => {
+            bGI[0].style.backgroundImage = "url('assets/bossstage.jpg')"
+            bossFight()
+        },
+        options: [
+            {
+                text: "continue",
+                nextText: 16
+            }
+        ]
+    },
+    {
+        id: 16,
+        text: "",
+        sideEffect: () => {
+            bGI[0].style.backgroundImage = "url('assets/continued.png')";
+            endsong()
+        },
+        options: [
+            {
+                text: "The end ... For now",
+                nextText: 17
+            }
+        ]
+    }
+]
 
 // ---------------------------
 // ------ GAME START ---------
