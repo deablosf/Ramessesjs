@@ -193,17 +193,22 @@ const roomRevisit = () => {
         if (state.firstRoom == false) {
             setTimeout(() => {
                 npcs.style.backgroundImage = "url('assets/Ruby.jpg')"
-            }, 2000);
-        } else {
-            textNodes[9].text = "What?! Think you're so badass, beating up some gang members and burning down an arcade?! you ain't Nothing! Weird ass kung fu turkey ...";
-        }
+            }, 1500);
+        }  
     } 
-    if (state.currentRoom == 10) {
-        if (state.secondRoom == true) {
-            textNodes[10].text = "Nothing left to do here.";
-            textNodes[10].options[0].text =  "Back to the Hallway"
-        }
+    if (state.firstRoom == true) {
+        textNodes[8].text = "No Ruby, no enemies, no Eclipes.";
+        textNodes[8].options.shift()
+        textNodes[8].options.shift()
+        textNodes[8].options[0].text = "Back to the hallway.";
     }
+    
+    if (state.secondRoom == true) {
+        textNodes[9].text = "Nothing left to do here.";
+        textNodes[9].options[0].text =  "Back to the Hallway";
+        textNodes[9].options[0].nextText = 8;
+    }
+    
 }
 //element.classList.add("my-class");
 //element.classList.remove("my-class");
@@ -345,9 +350,9 @@ let enemySelect2 = () => {
 // ------------------
 // PLAYER ACTIONS ------------
 const clubStrike = () => { // Normal Player attack
-    let swingAway = 1 + randN(Ramesses.combat)
+    let swingAway = 2 + randN(Ramesses.combat)
     if (swingAway >= target.athl/2){
-        target.health -= (2 + randN(Ramesses.str));
+        target.health -= (4 + randN(Ramesses.str));
         damageAni()
         gameMessage.innerText = "Direct Hit! Enemy Health: " + target.health;
         Ramesses.athl = Ramesses.origathl; 
@@ -879,6 +884,7 @@ const textNodes = [
         id: 11,
         text: "Now you know you're in the right place. Don't know if Eclipse's fat mouth is still shooting off. But they're all gonna pay for their Transgressions. ",
         sideEffect: () => {
+            roomRevisit()
             fight()
         },
         options: [
@@ -895,6 +901,9 @@ const textNodes = [
     {
         id: 12,
         text: "Nothing of use in this wreckage but the punk on the floor had a pocket full of candy.",
+        sideEffect: () => {
+            Ramesses.inventory.brownBetty += 2;
+        },
         options: [
             {
                 text: "Back to hallway",
@@ -918,6 +927,7 @@ const textNodes = [
         sideEffect: () => {
             npcs.style.backgroundImage = "none"
             state.firstRoom = true
+            roomRevisit()
             fight()
         },
         options: [
