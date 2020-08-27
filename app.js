@@ -183,28 +183,28 @@ let itemNumber = document.getElementById('itemnum');
 let healthNumber = document.getElementById('healthNum');
 
 // ----------------- Visuals (OOC)
+let bGI = document.getElementById('screenOOC');
+let npcs = document.getElementById('person');
 const textElement = document.getElementById('text');
 const optionButtonsElement = document.getElementById('selectBox')
 
 const roomRevisit = () => {
-    if (nextTextNodeId == 9) {
-        if (firstRoom == false) {
+    if (state.currentRoom == 9) {
+        if (state.firstRoom == false) {
             setTimeout(() => {
-                npcs[0].style.backgroundImage = "url('assets/Ruby.jpg')"
+                npcs.style.backgroundImage = "url('assets/Ruby.jpg')"
             }, 2000);
         } else {
-            npcs[0].style.backgroundImage = "url('assets/Ruby.jpg')";
             textNodes[9].text = "What?! Think you're so badass, beating up some gang members and burning down an arcade?! you ain't Nothing! Weird ass kung fu turkey ...";
         }
     } 
-    if (nextTextNodeId == 10) {
-        if (secondRoom == true) {
+    if (state.currentRoom == 10) {
+        if (state.secondRoom == true) {
             textNodes[10].text = "Nothing left to do here.";
             textNodes[10].options[0].text =  "Back to the Hallway"
+        }
     }
-    
 }
-
 //element.classList.add("my-class");
 //element.classList.remove("my-class");
 
@@ -567,12 +567,13 @@ const streetSweeper = () => {
 }
 
 let fight = () => {
-    // document.getElementById("ooc").style.display="none";
-    // document.getElementById("combat").removeAttribute("style");
-    // document.getElementById("ene2").removeAttribute("style");
+    document.getElementById("ooc").style.display="none";
+    document.getElementById("combat").removeAttribute("style");
+    document.getElementById("ene2").removeAttribute("style");
     itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     monsterGeny();
+    fightclub()
     if (versus.length == 2){
         enemyImage1.removeAttribute("style")
         enemyImage2.removeAttribute("style")
@@ -660,35 +661,43 @@ let state = {
 }
 
 const startGame = () => {
+    grandMaster()
+    document.getElementById("combat").style.display="none";
+    document.getElementById("ooc").removeAttribute("style");
+    bGI.style.backgroundImage = "url('assets/startBG11.jpg')";
+    healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+    showTextNode(1)
     state = {
+        currentRoom: '',
         firstRoom: false,
         secondRoom: false,
         thirdRoom: false
     }
-    showTextNode(1)
 }
 
 
 
 let showTextNode = (textNodeIndex) => {
     const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
-    textElement.innerText = textNode.text
-    while (optionsButonsElement.firstChild) {
-        optionsButonsElement.removeChild(optionButtonsElement.firstChild)
+    textElement.innerText = textNode.text;
+    while (optionButtonsElement.firstChild){
+        optionButtonsElement.removeChild(optionButtonsElement.firstChild)
     }
 
     textNode.options.forEach(option => {
         if (showOption(option)) {
             const button = document.createElement('button')
-            button.innerText= option.text
+            button.innerText = option.text
             button.classList.add('btn')
             button.addEventListener('click', () => selectOption(option))
             optionButtonsElement.appendChild(button)
         }
     })
+
     if (textNode.sideEffect) {
         textNode.sideEffect();
-    }                                                                                                                       
+    }
+
 }
 
 const showOption = (option) => {
@@ -700,6 +709,7 @@ const selectOption = (option) => {
     if (nextTextNodeId <= 0) {
         return startGame()
     }
+    state.currentRoom = nextTextNodeId;
     state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
 }
@@ -738,8 +748,8 @@ const textNodes = [
         id: 3,
         text: "Their dojo Master Teacher See Foo commands Ramesses and his remaining oath brother, “Anchor of the Unmoored kingdom“ to stay in the orphanage dojo; “Anyone weak enough to be taken deserves their fate” he says.",
         sideEffect: () => {
-            npcs[0].style.backgroundImage = "url('assets/Shifu.jpg')"
-            npcs[0].style.opacity = "0.6";
+            npcs.style.backgroundImage = "url('assets/Shifu.jpg')"
+            npcs.style.opacity = "0.6";
         },
         options: [
             {
@@ -752,8 +762,8 @@ const textNodes = [
         id: 4,
         text: "Ignoring their master’s words, the two of them head to the abandoned Harriet Stowe Housing community or what the local’s called “Tomny’s Projects”. They will face off against the Raptures Wronged to get their brother back or die trying. Ramesses- 'I told you that you didn’t have to come, see foo’s gonna come down on me for this'.",
         sideEffect: () => {
-            npcs[0].style.backgroundImage = "none"
-            bGI[0].style.backgroundImage = "url('assets/mainbuilding.png')";
+            npcs.style.backgroundImage = "none"
+            bGI.style.backgroundImage = "url('assets/mainbuilding.png')";
         },
         options: [
             {
@@ -766,8 +776,8 @@ const textNodes = [
         id: 5,
         text: "Anchor- 'You knew I wasn’t going to listen to your punk ass'. The two oath brothers stand at the heavy metal magnetically locked door of the project building. As they prepare to enter the building, the sound of vehicles pulling up draws their attention. Members of the Raptures Wronged slowly stepped out of the cars and off motorcycles. As the two prepare to face them, a buzzing comes from the door.",
         sideEffect: () => {
-            bGI[0].style.backgroundImage = "url('assets/greydoor.png')"
-            bGI[0].style.backgroundColor = "brown"
+            bGI.style.backgroundImage = "url('assets/greydoor.png')"
+            bGI.style.backgroundColor = "brown"
             
         },
         options: [
@@ -794,7 +804,7 @@ const textNodes = [
         id: 7,
         text: "Stretched out before you is the broken down lobby of the project building. A wall of what was once mailboxes to your right and a graffiti covered wall to your left. In front of you, a second security door that is folded in on itself like cardboard. Past the door is a wider space, an elevator bay; bombed with graffiti from squatters long gone.",
         sideEffect: () => { // place the elevator backgroound
-            bGI[0].style.backgroundImage = "url('assets/BGe.png')"
+            bGI.style.backgroundImage = "url('assets/BGe.png')"
         },
         options: [
             {
@@ -807,8 +817,8 @@ const textNodes = [
         id: 8,
         text: "A winding staircase of faux marble is covered with a layer of dust with footprints marking the passing of people and of the five apartments on this first floor only three of them have doors.",
         sideEffect: () => {
-            bGI[0].style.backgroundImage = "url('assets/BG5.jpg')";
-            npcs[0].style.backgroundImage = "none";
+            bGI.style.backgroundImage = "url('assets/BG5.jpg')";
+            npcs.style.backgroundImage = "none";
         },
         options:[
             {
@@ -829,12 +839,12 @@ const textNodes = [
         id: 9,
         text: "Ramesses~What kind of jive ass, silly, sad sack, narrow assed attempt at security is this?~ you think as you press the door open with your bat. Inside the bombed out room a woman sits on stacks of magazine, she looks up startled when you enter. Ruby~ Who are you?!",
         sideEffect: () => { // add first person 
-            bGI[0].style.backgroundImage = "url('assets/floor1R1.jpg')"
-            npcs[0].style.opacity = "1.0";
-            
-            setTimeout(() => {
-                npcs[0].style.backgroundImage = "url('assets/Ruby.jpg')"
-            }, 2000);
+            bGI.style.backgroundImage = "url('assets/floor1R1.jpg')"
+            npcs.style.opacity = "1.0";
+            roomRevisit()
+            // setTimeout(() => {
+            //     npcs[0].style.backgroundImage = "url('assets/Ruby.jpg')"
+            // }, 2000);
         },
         options: [
             {
@@ -856,7 +866,7 @@ const textNodes = [
         id: 10,
         text: "The sounds of vermin attempting to get away from you as you force open the door alerts you to the fact that you’re not alone here. The vermin whips around with weapon in hand. That punk Eclipse said somebody would be dumb enough to try and save him. ",
         sideEffect: () => {
-            bGI[0].style.backgroundImage = "url('assets/room2.jpg')"
+            bGI.style.backgroundImage = "url('assets/room2.jpg')"
         },
         options: [
             {
@@ -906,7 +916,8 @@ const textNodes = [
         id: 14,
         text: "Ruby ran out while you fighting. Don't worry, the arcade wasn't entirely your fault.",
         sideEffect: () => {
-            npcs[0].style.backgroundImage = "none"
+            npcs.style.backgroundImage = "none"
+            state.firstRoom = true
             fight()
         },
         options: [
@@ -920,7 +931,7 @@ const textNodes = [
         id: 15,
         text: "After beating the brakes off that handy capable sucka you find the keys to the stairwell. Perfect place, no one would ever think he'd be the one with the keys. One floor down not sure how many to go. But you're damn sure they know you're coming and they better be ready. Cause when Ramesses comes, he comes hard.",
         sideEffect: () => {
-            bGI[0].style.backgroundImage = "url('assets/bossstage.jpg')"
+            bGI.style.backgroundImage = "url('assets/bossstage.jpg')"
             bossFight()
         },
         options: [
@@ -934,7 +945,7 @@ const textNodes = [
         id: 16,
         text: "",
         sideEffect: () => {
-            bGI[0].style.backgroundImage = "url('assets/continued.png')";
+            bGI.style.backgroundImage = "url('assets/continued.png')";
             endsong()
         },
         options: [
@@ -951,4 +962,5 @@ const textNodes = [
 // ---------------------------
 
 
-fight()
+startGame()
+// fight()

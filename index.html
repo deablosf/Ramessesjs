@@ -8,7 +8,42 @@
 </head>
 
 <body>
-    <div id="combat" class="main">
+<!-- ______________ OUT OF COMBAT ______________ -->
+
+    <div id="ooc" class="main" style="display: none;">
+        <div id="screenOOC">
+            <div id="text" class="text"></div>
+            <div id="person" class="person"></div>
+        </div>
+        <div class="actionBar">
+            <div class="health"><br> 
+                <div id="healthcnt">Health</div>
+                <div id="healthNum"></div>
+                <br/>
+                <div id="" class="">Status effect</div>
+        </div>
+            <div class="actions">
+                <div id="selectBox" class="selectBox">
+                    <div class="btn">Option 1</div>
+                    <div class="btn">Option 2</div>
+                    <div class="btn">Option 3</div>
+                    <div class="btn">Option 4</div>
+                </div>
+            </div>
+                
+            <div class="inventory">
+                <div id="items" class="item1" onclick="brownBetty(usedItem)"></div>
+                <div id="itemnum" class="item1Num"></div>
+                <div id="items" class="item3" onclick=""></div>
+                <div id="items" class="item4" onclick=""></div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- _________  COMBAT ____________ -->
+
+    <div id="combat" class="main" style="display: none;">
         <div id="screen">
             <div id="ene1" class="enemy" onclick="enemySelect()"></div>
             <div id="ene2" class="enemy1" onclick="enemySelect1()"></div>
@@ -31,8 +66,8 @@
             <div class="inventory">
                 <div id="items" class="item1" onclick="brownBetty(usedItem)"></div>
                 <div id="itemnum" class="item1Num"></div>
-                <div id="items" class="item3" onclick="attack()"></div>
-                <div id="items" class="item4" onclick="attack()"></div>
+                <div id="items" class="item3" onclick=""></div>
+                <div id="items" class="item4" onclick=""></div>
             </div>
                 
         </div>

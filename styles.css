@@ -14,13 +14,59 @@ body{
     align-items: center;
 }
 
-/* ____________________ COMBAT SCREEN _________________ */
+/* ______________________ OUT OF COMBAT _____________________ */
 
 .main{
     border: solid antiquewhite;
     width: 80vw;
     height: 91vh;
 }
+
+#screenOOC {
+    border: solid;
+    width: 80vw;
+    height: 60vh;
+    border-radius: 5px;
+    background-blend-mode: darken;
+    background-size: 100% 100%;
+    display: grid;
+    grid-template-columns: 5vw 5vw 5vw;
+    grid-template-rows: 5vh 5vh 5vh;
+    grid-auto-columns: 5vw;
+    grid-auto-rows: 5vh;
+}
+
+.person{
+    /* border: solid crimson; */
+    height: 40vh;
+    width: 25vw;
+    background-size: 100% 100%;
+    grid-column: 6/7;
+    
+}
+
+.text{
+    border: solid gainsboro;
+    grid-row: 10/13;
+    grid-column: 3/15;
+    color: white;
+    background-color: blue; opacity: 0.9;
+    font-weight: bold;
+}
+
+.btn {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: black;
+}
+
+.btn:hover{
+    border: solid gold;
+}
+
+/* ____________________ COMBAT SCREEN _________________ */
+
+
 
 #screen {
     border: solid salmon;
