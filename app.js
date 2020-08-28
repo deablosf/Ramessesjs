@@ -321,6 +321,14 @@ let monsterGeny = () => {
     return versus;
 }
 
+let bossGeny = () => {
+    let y = 1
+    for (let i = 0; i < y; i++) {
+        versus.push(new Enemy(bossNames[0].name, bossNames[0].image, bossNames[0].snaps))
+    }
+    return versus;
+}
+
 let enemySelect = () => {
     document.getElementById("ene1").style.border = "solid gold";
     document.getElementById("ene2").style.border = "none";
@@ -595,8 +603,18 @@ let fight = () => {
         gameMessage.innerText = versus[0].snaps[randN0(4)];  
     }
      
-    }
+}
 
+let bossFight = () => {
+    flrOneBoss()
+    document.getElementById("ooc").style.display="none";
+    document.getElementById("combat").removeAttribute("style");
+    document.getElementById("ene1").removeAttribute("style");
+    bossGeny()
+    enemyImage.style.backgroundImage = versus[0].image;
+    gameMessage.innerText = versus[0].snaps[0];
+         
+}
 
 // Players attack and computer's reaction
 const attack = (x) => { 
@@ -847,9 +865,7 @@ const textNodes = [
             bGI.style.backgroundImage = "url('assets/floor1R1.jpg')"
             npcs.style.opacity = "1.0";
             roomRevisit()
-            // setTimeout(() => {
-            //     npcs[0].style.backgroundImage = "url('assets/Ruby.jpg')"
-            // }, 2000);
+            
         },
         options: [
             {
@@ -884,8 +900,10 @@ const textNodes = [
         id: 11,
         text: "Now you know you're in the right place. Don't know if Eclipse's fat mouth is still shooting off. But they're all gonna pay for their Transgressions. ",
         sideEffect: () => {
-            roomRevisit()
+            state.secondRoom = true;
             fight()
+            roomRevisit()
+            
         },
         options: [
             {
@@ -903,6 +921,7 @@ const textNodes = [
         text: "Nothing of use in this wreckage but the punk on the floor had a pocket full of candy.",
         sideEffect: () => {
             Ramesses.inventory.brownBetty += 2;
+            itemNumber.innerText = "X " + Ramesses.inventory.brownBetty;
         },
         options: [
             {
