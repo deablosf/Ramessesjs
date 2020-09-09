@@ -14,6 +14,18 @@ body{
     align-items: center;
 }
 
+/* __________________ START SCREEN __________________ */
+
+#startScreen{
+    width: 80vw;
+    height: 91vh;
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 /* ______________________ OUT OF COMBAT _____________________ */
 
 .main{
@@ -62,6 +74,33 @@ body{
 
 .btn:hover{
     border: solid gold;
+}
+
+.healthOOC{
+    border: solid peachpuff;
+    width: 20vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 600;
+    background-image: url(assets/doubt_griff.jpg);
+    background-size: 100% 100%;
+    background-color: gold;
+    background-blend-mode: darken;
+}
+
+#healthcntOOC{
+    color: aliceblue;
+}
+
+#healthNumOOC{
+    color: aliceblue;
+}
+
+#statusOOC{
+    color: aliceblue;
 }
 
 /* ____________________ COMBAT SCREEN _________________ */
@@ -156,6 +195,18 @@ body{
     background-size: 100% 100%;
     background-color: gold;
     background-blend-mode: darken;
+}
+
+#healthcnt{
+    color: aliceblue;
+}
+
+#healthNum{
+    color: aliceblue;
+}
+
+#status{
+    color: aliceblue;
 }
 
 .actions{

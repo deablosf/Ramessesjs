@@ -8,6 +8,15 @@
 </head>
 
 <body>
+
+<!-- ________________ START SCREEN _______________ -->
+    <div id="startScreen" class="">
+        <div></div>
+        <div> <button onclick="startGame()"><img src="assets/boombox.gif"/></button>  </div>
+    </div>
+
+
+
 <!-- ______________ OUT OF COMBAT ______________ -->
 
     <div id="ooc" class="main" style="display: none;">
@@ -16,11 +25,10 @@
             <div id="person" class="person"></div>
         </div>
         <div class="actionBar">
-            <div class="health"><br> 
-                <div id="healthcnt">Health</div>
-                <div id="healthNum"></div>
-                <br/>
-                <div id="" class="">Status effect</div>
+            <div class="healthOOC"><br> 
+                <div id="healthcntOOC">Health</div>
+                <div id="healthNumOOC"></div>
+                <div id="statusOOC" class="">Status effect</div>
         </div>
             <div class="actions">
                 <div id="selectBox" class="selectBox">
@@ -55,7 +63,7 @@
                 <div id="healthcnt">Health</div>
                 <div id="healthNum"></div>
                 
-                <div id="" class="">Status effect</div>
+                <div id="status" class="">Status effect</div>
             </div>
             <div class="actions">
                 <button class="attack" onclick="attack(clubStrike)">Club strike</button>

@@ -181,6 +181,7 @@ let enemyImage2 = document.getElementById('ene3');
 let gameMessage = document.getElementById('textbox');
 let itemNumber = document.getElementById('itemnum');
 let healthNumber = document.getElementById('healthNum');
+let healthNumber1 = document.getElementById('healthNumOOC');
 
 // ----------------- Visuals (OOC)
 let bGI = document.getElementById('screenOOC');
@@ -464,6 +465,8 @@ const brownBetty = (x) => {
         console.log("Healing has happened")
         itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
         healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+        healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+        
         x()  
     } else {
         snortSFX()
@@ -471,6 +474,7 @@ const brownBetty = (x) => {
         Ramesses.health += 5;
         itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
         healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+        healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
         console.log("Healing has happened")
         x()
     }
@@ -492,6 +496,7 @@ const attackR = (x) => {
         x.aimBonus = 0;
         gameMessage.innerText = x.name + "'s attack hit " + "Ramess health: " + Ramesses.health; 
         healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+        healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
         console.log("attack happened")
         }, 750);
         
@@ -556,6 +561,7 @@ const isGameOver = (health) => {
 
 const streetSweeper = () => {
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+    healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     if (versus.length == 1) {
         if (isGameOver(versus[0].health)){
                 endFight("Ramesses Wins")
@@ -585,6 +591,7 @@ let fight = () => {
     document.getElementById("ene2").removeAttribute("style");
     itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+    healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     monsterGeny();
     fightclub()
     if (versus.length == 2){
@@ -686,9 +693,11 @@ let state = {
 const startGame = () => {
     grandMaster()
     document.getElementById("combat").style.display="none";
+    document.getElementById("startScreen").style.display="none";
     document.getElementById("ooc").removeAttribute("style");
     bGI.style.backgroundImage = "url('assets/startBG11.jpg')";
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+    healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     showTextNode(1)
     state = {
         currentRoom: '',
@@ -991,5 +1000,5 @@ const textNodes = [
 // ---------------------------
 
 
-startGame()
+//startGame()
 // fight()
