@@ -296,3 +296,14 @@ body{
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
+
+  .aimed {
+      background-image: url(./assets/retical.png);
+      animation: aiming 0.5s timing-function delay iteration-count direction fill-mode;
+  }
+  @keyframes aiming {
+    0% { transform: rotate(0deg);
+    opacity: 0.1; }
+    100% { transform: rotate(360deg);
+    opacity: 1; }
+  }
