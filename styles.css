@@ -307,3 +307,8 @@ body{
     100% { transform: rotate(360deg);
     opacity: 1; }
   }
+
+
+  @keyframes snorting {
+      
+  }
