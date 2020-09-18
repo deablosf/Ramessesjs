@@ -105,8 +105,6 @@ body{
 
 /* ____________________ COMBAT SCREEN _________________ */
 
-
-
 #screen {
     border: solid salmon;
     background-color: black;
@@ -122,8 +120,29 @@ body{
     grid-template-rows: 20% 20% 20% 20% 20%;
 }
 
+#eneact1 {
+    width: 12vw;
+    height: 12vh;
+    grid-column: 3;
+    justify-self: center;
+}
+
+#eneact2 {
+    width: 12vw;
+    height: 12vh;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#eneact3 {
+    width: 12vw;
+    height: 12vh;
+    grid-column: 4;
+    grid-row: 2;
+    justify-self: center;
+}
+
 .enemy{
-    border: solid forestgreen;
     width: 30vw;
     height: 60vh;
     grid-column: 3;
@@ -136,7 +155,6 @@ body{
 }
 
 .enemy1{
-    border: solid forestgreen;
     width: 30vw;
     height: 60vh;
     grid-column: 2;
@@ -150,7 +168,6 @@ body{
 }
 
 .enemy2{
-    border: solid forestgreen;
     width: 30vw;
     height: 60vh;
     grid-column: 4;
@@ -299,16 +316,23 @@ body{
 
   .aimed {
       background-image: url(./assets/retical.png);
-      animation: aiming 0.5s timing-function delay iteration-count direction fill-mode;
+      background-size: 100%;
+      animation: aiming 0.5s;
   }
   @keyframes aiming {
     0% { transform: rotate(0deg);
     opacity: 0.1; }
     100% { transform: rotate(360deg);
     opacity: 1; }
+  } 
+
+  .snorted {
+      background-image: url(./assets/powder.png);
+      background-size: 100%;
+      animation: snorting 1.5s;
   }
 
-
   @keyframes snorting {
-      
+      0% { transform: scale(2); opacity: 1;}
+      100% { transform: scale(.2); opacity: .5;}
   }

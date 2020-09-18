@@ -6,6 +6,9 @@
 // Section 04: Enemy Generator & Placement
 
 
+// THings left to build
+// Miss animation for enemies and player, game over screen, redo the continue music, improve item box, make the attack options look better, 
+
 //--------------------- Section 01
 // ------ Character Sheets! -------
 // ---------------------
@@ -115,7 +118,7 @@ const enemyNames = [
 const bossNames = [
     {
         name: "RoadKill",
-        image: "url('assets/Boss1.png')",
+        image: "url('assets/boss1.png')",
         snaps: ["So you're guy Ruby was screaming about; the friend of that disrespectful asshole and the guy that burned down Grustigies Arcade. "]
     }
 ]
@@ -182,6 +185,9 @@ let gameMessage = document.getElementById('textbox');
 let itemNumber = document.getElementById('itemnum');
 let healthNumber = document.getElementById('healthNum');
 let healthNumber1 = document.getElementById('healthNumOOC');
+let eneAct1 = document.getElementById('eneact1');
+let eneAct2 = document.getElementById('eneact2');
+let eneAct3 = document.getElementById('eneact3');
 
 // ----------------- Visuals (OOC)
 let bGI = document.getElementById('screenOOC');
@@ -215,26 +221,103 @@ const roomRevisit = () => {
 //element.classList.remove("my-class");
 
 
-let damageAni = () => {
+const damageAni = () => {
     hitSFX1()
-    enemyImage.style.border = "solid red";
+    if (versus.length == 2) {
+        if (target == versus[0]) {
+            enemyImage1.style.border = "solid red";
     setTimeout(() => {
-            enemyImage.style.border = "none";
+            enemyImage1.style.border = "none";
             }, 125);
     setTimeout(() => {
-            enemyImage.style.border = "solid red";
+            enemyImage1.style.border = "solid red";
             }, 250);
     setTimeout(() => {
+            enemyImage1.style.border = "none";
+            }, 375);
+        } else if (target == versus[1]) {
+                enemyImage2.style.border = "solid red";
+                setTimeout(() => {
+                    enemyImage2.style.border = "none";
+                }, 125);
+                setTimeout(() => {
+                    enemyImage2.style.border = "solid red";
+                    }, 250);
+                setTimeout(() => {
+                    enemyImage2.style.border = "none";
+                    }, 375);
+        }
+    } else {
+        enemyImage.style.border = "solid red";
+        setTimeout(() => {
+            enemyImage.style.border = "none";
+            }, 125);
+        setTimeout(() => {
+            enemyImage.style.border = "solid red";
+            }, 250);
+        setTimeout(() => {
             enemyImage.style.border = "none";
             }, 375);
+    }
 }
 
-let damagedAni = () => {
+const damagedAni = () => {
     combatScreen.classList.add("screen")
     setTimeout(() => {
         combatScreen.classList.remove("screen")
     }, 500);
 }
+
+const aimed = (X) => {
+    aimingSFX()
+    if (x = versus[1]) {
+            eneAct3.classList.add("aimed")
+            setTimeout(() => {
+                eneAct3.classList.remove("aimed")
+            }, 500);
+        }
+
+    if (versus.length == 2 && x == versus[0]) {
+            eneAct2.classList.add("aimed")
+            setTimeout(() => {
+                eneAct2.classList.remove("aimed")
+            }, 500);
+        
+    }  
+    
+    if (versus.length == 1) {
+        eneAct1.classList.add("aimed")
+            setTimeout(() => {
+                eneAct1.classList.remove("aimed")
+            }, 500);
+    }
+}
+
+const snorted = (X) => {
+    snortSFX()
+    if (x = versus[1]) {
+            eneAct3.classList.add("snorted")
+            setTimeout(() => {
+                eneAct3.classList.remove("snorted")
+            }, 1500);
+        }
+
+    if (versus.length == 2 && x == versus[0]) {
+            eneAct2.classList.add("snorted")
+            setTimeout(() => {
+                eneAct2.classList.remove("snorted")
+            }, 1500);
+        
+    }  
+    
+    if (versus.length == 1) {
+        eneAct1.classList.add("snorted")
+            setTimeout(() => {
+                eneAct1.classList.remove("snorted")
+            }, 1500);
+    }
+}
+
 
 // ------------- AUDIO
 
@@ -512,21 +595,21 @@ const attackR = (x) => {
 
 const aim = (x) => {
     setTimeout(() => {
-        aimingSFX()
+        aimed(x)
         x.aimBonus +=2;
         gameMessage.innerText = "Looks like " + x.name + " is taking aim!  " + x.aimBonus;
-        console.log("aim happened")
+        console.log(x)
     }, 1000); 
 }
 
 const cocaine = (x) => {
     setTimeout(() => {
-        snortSFX()
+        snorted(x)
         x.combat += 2;
         x.str += 2;
         x.health += 5;
         gameMessage.innerText = x.name + " took a bump!"
-        console.log("Bump!!")
+        console.log(x)
     }, 800);
 }
 
@@ -1001,4 +1084,4 @@ const textNodes = [
 
 
 //startGame()
-// fight()
+ //fight()
