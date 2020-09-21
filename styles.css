@@ -336,3 +336,55 @@ body{
       0% { transform: scale(2); opacity: 1;}
       100% { transform: scale(.2); opacity: .5;}
   }
+
+
+  .missing1 {
+    animation: missing1 0.5s;
+  }
+  
+  .missing2 {
+    animation: missing2 0.5s;
+  }
+
+  @keyframes missing1 {
+      0% { transform: rotate(0deg); left: 0vw; }
+      50% { transform: rotate(20deg); left: 2vw;}
+      100% { transform: rotate(0deg); left: 0vw;}
+  }
+
+  @keyframes missing2 {
+      0% { transform: rotate(0deg); right: 0vw; }
+      50% { transform: rotate(-20deg); right: 2vw;}
+      100% { transform: rotate(0deg); right: 0vw;}
+  }
+
+
+  .missed1 {
+      animation: missed1 0.5s;
+  }
+
+  .missed2 {
+      animation: missed2 0.5s;
+  }
+
+  .missed3 {
+      animation: missed3 0.5s;
+  }
+
+  @keyframes missed1 {
+      0% { transform: rotate(0deg); left: 0px; }
+      50% { transform: rotate(0deg); left: 200px;}
+      100% { transform: rotate(0deg); left: 0px;}
+  }
+
+  @keyframes missed2 {
+      0% { transform: rotate(0deg); right: 0px; }
+      50% { transform: rotate(0deg); right: 200px;}
+      100% { transform: rotate(0deg); right: 0px;}
+  }
+
+  @keyframes missed3 {
+      0% { transform: rotate(0deg); top: 0px; }
+      50% { transform: rotate(0deg); top: 100px;}
+      100% { transform: rotate(0deg); top: 0px;}
+  }

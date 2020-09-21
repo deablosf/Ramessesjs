@@ -177,7 +177,7 @@ let randN0 = (max) => {
 // --------------------- SFX 
 // --------------------
 // ----------------- Visuals (Combat)
-let combatScreen = document.getElementById('screen');
+const combatScreen = document.getElementById('screen');
 let enemyImage = document.getElementById('ene1');
 let enemyImage1 = document.getElementById('ene2');
 let enemyImage2 = document.getElementById('ene3');
@@ -268,20 +268,109 @@ const damagedAni = () => {
     }, 500);
 }
 
+const cantTouchThis = () => {
+    missSFX2()
+    let x = randN(3);
+    if (x == 1) {
+        combatScreen.classList.add("missing1")
+        setTimeout(() => {
+            combatScreen.classList.remove("missing1")
+        }, 500);
+    } else {
+        combatScreen.classList.add("missing2")
+        setTimeout(() => {
+            combatScreen.classList.remove("missing2")
+        }, 500);
+    }
+}
+
+const couldntTouchThat = () => {
+    missSFX1()
+    let y = randN(4)
+    if (target = versus[1]) {
+        if (y == 1){
+            enemyImage2.classList.add("missed1")
+            setTimeout(() => {
+                enemyImage2.classList.remove("missed1")
+            }, 500);
+        }
+
+        if (y == 2){
+            enemyImage2.classList.add("missed2")
+            setTimeout(() => {
+                enemyImage2.classList.remove("missed2")
+            }, 500);
+        }
+
+        if (y == 3){
+            enemyImage2.classList.add("missed3")
+            setTimeout(() => {
+                enemyImage2.classList.remove("missed3")
+            }, 500);
+        }
+        }
+
+    if (versus.length == 2 && target == versus[0]) {
+        if (y == 1){
+            enemyImage1.classList.add("missed1")
+            setTimeout(() => {
+                enemyImage1.classList.remove("missed1")
+            }, 500);
+        }
+
+        if (y == 2){
+            enemyImage1.classList.add("missed2")
+            setTimeout(() => {
+                enemyImage1.classList.remove("missed2")
+            }, 500);
+        }
+
+        if (y == 3){
+            enemyImage1.classList.add("missed3")
+            setTimeout(() => {
+                enemyImage1.classList.remove("missed3")
+            }, 500);
+        }
+    }  
+    
+    if (versus.length == 1) {
+        if (y == 1){
+            enemyImage.classList.add("missed1")
+            setTimeout(() => {
+                enemyImage.classList.remove("missed1")
+            }, 500);
+        }
+
+        if (y == 2){
+            enemyImage.classList.add("missed2")
+            setTimeout(() => {
+                enemyImage.classList.remove("missed2")
+            }, 500);
+        }
+
+        if (y == 3){
+            enemyImage.classList.add("missed3")
+            setTimeout(() => {
+                enemyImage.classList.remove("missed3")
+            }, 500);
+        }
+    }
+}
+
 const aimed = (X) => {
     aimingSFX()
     if (x = versus[1]) {
             eneAct3.classList.add("aimed")
             setTimeout(() => {
                 eneAct3.classList.remove("aimed")
-            }, 500);
+            }, 800);
         }
 
-    if (versus.length == 2 && x == versus[0]) {
+    if (x == versus[0] && versus.length == 2) {
             eneAct2.classList.add("aimed")
             setTimeout(() => {
                 eneAct2.classList.remove("aimed")
-            }, 500);
+            }, 800);
         
     }  
     
@@ -289,7 +378,7 @@ const aimed = (X) => {
         eneAct1.classList.add("aimed")
             setTimeout(() => {
                 eneAct1.classList.remove("aimed")
-            }, 500);
+            }, 800);
     }
 }
 
@@ -302,7 +391,7 @@ const snorted = (X) => {
             }, 1500);
         }
 
-    if (versus.length == 2 && x == versus[0]) {
+    if (x == versus[0] && versus.length == 2) {
             eneAct2.classList.add("snorted")
             setTimeout(() => {
                 eneAct2.classList.remove("snorted")
@@ -450,7 +539,7 @@ const clubStrike = () => { // Normal Player attack
         Ramesses.athl = Ramesses.origathl; 
     } else {
         gameMessage.innerText = "Missed";
-        missSFX1()
+        couldntTouchThat()
     }
     target = 1;
 }
@@ -472,7 +561,7 @@ const violentThrust = () => {  // lowers next attacks damage by 6 but adds athl 
         setTimeout(() => {
             Ramesses.athl -= 5;
             gameMessage.innerText = " Only to miss ...";
-            missSFX1()
+            couldntTouchThat()
         }, 1000);
     }
     target = 1;
@@ -493,7 +582,7 @@ const ravanaBackHand = () => { //multiple attacks 拉瓦那的反手, less chanc
             delay(i)
         }
     } else {
-        missSFX1()
+        couldntTouchThat()
         gameMessage.innerText = "Way to swing mighty Casey"  ;
 }
 target = 1;
@@ -507,7 +596,7 @@ const thirstyBat = () => {
         gameMessage.innerText = "Doing the impossible you're blunt bat has drawn blood! Enemy Health: " + target.health;
     } else {
         gameMessage.innerText = "Missed";
-        missSFX1()
+        couldntTouchThat()
     }
     target = 1;
 }
@@ -587,7 +676,7 @@ const attackR = (x) => {
         setTimeout(() => {
             x.aimBonus = 0;
             gameMessage.innerText = x.name + " Missed, Now's your chance!";
-            missSFX2()
+            cantTouchThis()
             console.log("missed happened")
         }, 1000);   
     }      
@@ -654,14 +743,20 @@ const streetSweeper = () => {
             if (versus[1].health <= 0){
                 versus.pop();
                 enemyImage.removeAttribute("style");
+                eneAct1.removeAttribute("style");
                 enemyImage1.style.display="none";
                 enemyImage2.style.display="none";
+                eneAct2.style.display="none";
+                eneAct3.style.display="none";
                 enemyImage.style.backgroundImage = versus[0].image;
         }  else if (versus[0].health <= 0){
                 versus.shift();
                 enemyImage.removeAttribute("style");
+                eneAct1.removeAttribute("style");
                 enemyImage1.style.display="none";
                 enemyImage2.style.display="none";
+                eneAct2.style.display="none";
+                eneAct3.style.display="none";
                 enemyImage.style.backgroundImage = versus[0].image;
         } 
         }
@@ -680,19 +775,24 @@ let fight = () => {
     if (versus.length == 2){
         enemyImage1.removeAttribute("style")
         enemyImage2.removeAttribute("style")
+        eneAct2.removeAttribute("style");
+        eneAct3.removeAttribute("style");
         enemyImage.style.display="none";
+        eneAct1.style.display="none";
         enemyImage1.style.backgroundImage = versus[0].image;
         enemyImage2.style.backgroundImage = versus[1].image;
         gameMessage.innerText = versus[0].snaps[randN0(4)];
         
     } else {
         enemyImage.removeAttribute("style");
+        eneAct1.removeAttribute("style");
         enemyImage1.style.display="none";
         enemyImage2.style.display="none";
         enemyImage.style.backgroundImage = versus[0].image;
         gameMessage.innerText = versus[0].snaps[randN0(4)];  
+        eneAct2.style.display="none";
+        eneAct3.style.display="none";
     }
-     
 }
 
 let bossFight = () => {
