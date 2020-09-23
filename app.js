@@ -183,6 +183,7 @@ let enemyImage1 = document.getElementById('ene2');
 let enemyImage2 = document.getElementById('ene3');
 let gameMessage = document.getElementById('textbox');
 let itemNumber = document.getElementById('itemnum');
+let itemNumberCombat = document.getElementById('itemnumcom')
 let healthNumber = document.getElementById('healthNum');
 let healthNumber1 = document.getElementById('healthNumOOC');
 let eneAct1 = document.getElementById('eneact1');
@@ -199,8 +200,9 @@ const roomRevisit = () => {
     if (state.currentRoom == 9) {
         if (state.firstRoom == false) {
             setTimeout(() => {
+                glassBreakSFX()
                 npcs.style.backgroundImage = "url('assets/Ruby.jpg')"
-            }, 1500);
+            }, 1250);
         }  
     } 
     if (state.firstRoom == true) {
@@ -439,8 +441,11 @@ let miss2 = document.getElementById('miss2')
 
 let grandMaster = () => {
     battleMusic.pause()
+    battleMusic.currentTime = 0;
     music.play()
     flOneBoss.pause()
+    roundabout.pause()
+    roundabout.currentTime = 0;
 }
 let fightclub = () => {
     music.pause()
@@ -483,12 +488,14 @@ let snortSFX = () => {
 let aimingSFX = () => {
     aiming.play()
 }
-
 let damagedSFX = () => {
     let hits = [hitSFX2, hitSFX3, hitSFX4];
     let picker = hits.length +1;
     let i = randN(picker) -1;
     hits[i]()
+}
+let glassBreakSFX = () => {
+    glassBreak.play()
 }
 
 // ------------------------- Section 04
@@ -782,6 +789,7 @@ let fight = () => {
     document.getElementById("combat").removeAttribute("style");
     document.getElementById("ene2").removeAttribute("style");
     itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
+    itemNumberCombat.innerText = "X " + Ramesses.inventory.brownBetty;
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     monsterGeny();
@@ -895,6 +903,8 @@ const startGame = () => {
     bGI.style.backgroundImage = "url('assets/startBG11.jpg')";
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+    itemNumber.innerText = "X " + Ramesses.inventory.brownBetty; 
+    itemNumberCombat.innerText = "X " + Ramesses.inventory.brownBetty;
     showTextNode(1)
     state = {
         currentRoom: '',
