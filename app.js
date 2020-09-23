@@ -204,16 +204,11 @@ const roomRevisit = () => {
         }  
     } 
     if (state.firstRoom == true) {
-        textNodes[8].text = "No Ruby, no enemies, no Eclipes.";
-        textNodes[8].options.shift()
-        textNodes[8].options.shift()
-        textNodes[8].options[0].text = "Back to the hallway.";
+        textNodes[7].options[0].nextText = 17;
     }
     
     if (state.secondRoom == true) {
-        textNodes[9].text = "Nothing left to do here.";
-        textNodes[9].options[0].text =  "Back to the Hallway";
-        textNodes[9].options[0].nextText = 8;
+        textNodes[7].options[1].nextText = 18;
     }
     
 }
@@ -384,7 +379,7 @@ const aimed = (X) => {
 
 const snorted = (X) => {
     snortSFX()
-    if (x = versus[1]) {
+    if (x == versus[1]) {
             eneAct3.classList.add("snorted")
             setTimeout(() => {
                 eneAct3.classList.remove("snorted")
@@ -1143,7 +1138,7 @@ const textNodes = [
         },
         options: [
             {
-                text: "Back tothe hallway",
+                text: "Back to the hallway",
                 nextText: 8
             }
         ]
@@ -1173,6 +1168,32 @@ const textNodes = [
             {
                 text: "The end ... For now",
                 nextText: 17
+            }
+        ]
+    },
+    {
+        id: 17,
+        text: "No Ruby, no enemies, no Eclipes.",
+        sideEffect: () => {
+            bGI.style.backgroundImage = "url('assets/floor1R1.jpg')"
+        },
+        options: [
+            {
+                text: "Back to the hallway.",
+                nextText: 8
+            }
+        ]
+    },
+    {
+        id: 18,
+        text: "Nothing left to do here.",
+        sideEffect: () => {
+            bGI.style.backgroundImage = "url('assets/room2.jpg')"
+        },
+        options: [
+            {
+                text: "Back to the Hallway",
+                nextText: 8
             }
         ]
     }
