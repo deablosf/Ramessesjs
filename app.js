@@ -223,13 +223,19 @@ const damageAni = () => {
             enemyImage1.style.border = "solid red";
     setTimeout(() => {
             enemyImage1.style.border = "none";
-            }, 125);
+            }, 100);
     setTimeout(() => {
             enemyImage1.style.border = "solid red";
-            }, 250);
+            }, 200);
     setTimeout(() => {
             enemyImage1.style.border = "none";
-            }, 375);
+            }, 300);
+    setTimeout(() => {
+            enemyImage1.style.border = "solid red";
+            }, 500);
+    setTimeout(() => {
+            enemyImage1.style.border = "none";
+            }, 600);
         } else if (target == versus[1]) {
                 enemyImage2.style.border = "solid red";
                 setTimeout(() => {
@@ -241,6 +247,12 @@ const damageAni = () => {
                 setTimeout(() => {
                     enemyImage2.style.border = "none";
                     }, 375);
+                setTimeout(() => {
+                    enemyImage2.style.border = "solid red";
+                    }, 500);
+                setTimeout(() => {
+                    enemyImage2.style.border = "none";
+                    }, 625);
         }
     } else {
         enemyImage.style.border = "solid red";
@@ -253,6 +265,12 @@ const damageAni = () => {
         setTimeout(() => {
             enemyImage.style.border = "none";
             }, 375);
+        setTimeout(() => {
+            enemyImage.style.border = "solid red";
+            }, 500);
+        setTimeout(() => {
+            enemyImage.style.border = "none";
+            }, 625);
     }
 }
 
@@ -1168,7 +1186,7 @@ const textNodes = [
         options: [
             {
                 text: "The end ... For now",
-                nextText: 17
+                nextText: 19
             }
         ]
     },
@@ -1195,6 +1213,19 @@ const textNodes = [
             {
                 text: "Back to the Hallway",
                 nextText: 8
+            }
+        ]
+    },
+    {
+        id: 19,
+        text: "",
+        sideEffect: () => {
+            startGame()
+        },
+        options: [
+            {
+                text: "",
+                nextText: 17
             }
         ]
     }

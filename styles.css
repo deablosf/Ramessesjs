@@ -20,9 +20,40 @@ body{
     width: 80vw;
     height: 91vh;
     background-color: purple;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+}
+
+span{
+    font-weight: 900;
+    font-size: 38px;
+}
+
+.letters{
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: center;
     display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.letters span{
+    position: relative;
+    display: inline-block;
+    animation: rainbow 1.5s linear infinite;
+}
+
+.boom{
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: center;
+}
+
+.start{
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
 }
 
 
@@ -253,7 +284,7 @@ body{
     height: 30vh;
     background-image: url(assets/explore_graf.jpeg);
     background-size: 100% 100%;
-    background-color: gold;
+    background-cflexolor: gold;
     background-blend-mode: darken;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
@@ -347,15 +378,27 @@ body{
   }
 
   @keyframes missing1 {
-      0% { transform: rotate(0deg); left: 0vw; }
-      50% { transform: rotate(10deg); left: 2vw;}
-      100% { transform: rotate(0deg); left: 0vw;}
+      0% { 
+          transform: rotate(0deg) translateX(0px);
+        }
+      50% { 
+          transform: rotate(-10deg) translateX(-50px);
+        }
+      100% { 
+          transform: rotate(0deg) translateX(0px);
+        }
   }
 
   @keyframes missing2 {
-      0% { transform: rotate(0deg); right: 0vw; }
-      50% { transform: rotate(-10deg); right: 2vw;}
-      100% { transform: rotate(0deg); right: 0vw;}
+      0% { 
+          transform: rotate(0deg) translateX(0px);
+        }
+      50% { 
+          transform: rotate(10deg) translateX(50px);
+        }
+      100% { 
+          transform: rotate(0deg) translateX(0px);
+        }
   }
 
 
@@ -372,19 +415,60 @@ body{
   }
 
   @keyframes missed1 {
-      0% { transform: rotate(0deg); left: 0px; }
-      50% { transform: rotate(0deg); left: 200px;}
-      100% { transform: rotate(0deg); left: 0px;}
+      0% { transform: translateX(0vw); }
+      50% { transform: translateX(-4vw);}
+      100% { transform: translateX(0vw);}
   }
 
   @keyframes missed2 {
-      0% { transform: rotate(0deg); right: 0px; }
-      50% { transform: rotate(0deg); right: 200px;}
-      100% { transform: rotate(0deg); right: 0px;}
+      0% { transform: translateX(0vw); }
+      50% { transform: translateX(4vw);}
+      100% { transform: translateX(0vw);}
   }
 
   @keyframes missed3 {
-      0% { transform: rotate(0deg); top: 0px; }
-      50% { transform: rotate(0deg); top: 100px;}
-      100% { transform: rotate(0deg); top: 0px;}
+      0% { transform: translateY(0vh); }
+      50% { transform: translateY(-4vh);}
+      100% { transform: translateY(0vh);}
+  }
+
+  .letters span:nth-child(1){
+      animation-delay: 0.2s;
+  }
+  .letters span:nth-child(2){
+      animation-delay: 0.4s;
+  }
+  .letters span:nth-child(3){
+      animation-delay: 0.6s;
+  }
+  .letters span:nth-child(4){
+      animation-delay: 0.8s;
+  }
+  .letters span:nth-child(5){
+      animation-delay: 1s;
+  }
+  
+
+  @keyframes rainbow {
+    0% {
+        transform: translateY(0px) rotateY(0deg);
+    }
+    5% {
+        transform: translateY(-10px) ;
+    }
+    10% {
+        transform: translateY(-20px) ;
+    }
+    15% {
+        transform: translateY(-30px) ;
+    }
+    20% {
+        transform: translateY(-20px) ;
+    }
+    25% {
+        transform: translateY(-10px) ;
+    }
+    30% {
+        transform: translateY(0px) rotateY(360deg);
+    }
   }
