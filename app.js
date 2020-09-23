@@ -352,16 +352,16 @@ const couldntTouchThat = () => {
     }
 }
 
-const aimed = (X) => {
+const aimed = (x) => {
     aimingSFX()
-    if (x = versus[1]) {
+    if (x == 1) {
             eneAct3.classList.add("aimed")
             setTimeout(() => {
                 eneAct3.classList.remove("aimed")
             }, 800);
         }
 
-    if (x == versus[0] && versus.length == 2) {
+    if (x == 0 && versus.length == 2) {
             eneAct2.classList.add("aimed")
             setTimeout(() => {
                 eneAct2.classList.remove("aimed")
@@ -377,16 +377,16 @@ const aimed = (X) => {
     }
 }
 
-const snorted = (X) => {
+const snorted = (x) => {
     snortSFX()
-    if (x == versus[1]) {
+    if (x == 1) {
             eneAct3.classList.add("snorted")
             setTimeout(() => {
                 eneAct3.classList.remove("snorted")
             }, 1500);
         }
 
-    if (x == versus[0] && versus.length == 2) {
+    if (x == 0 && versus.length == 2) {
             eneAct2.classList.add("snorted")
             setTimeout(() => {
                 eneAct2.classList.remove("snorted")
@@ -652,8 +652,8 @@ const bandage = (X) => {
 }
 
 // NPC ACTIONS -----------------
-const attackR = (x) => {
-    
+const attackR = (x, z) => {
+    console.log(z)
     let strikechance = x.aimBonus + randN(x.combat);
     if (strikechance >= Ramesses.athl/2){
         damagedAni()
@@ -677,23 +677,24 @@ const attackR = (x) => {
     }      
 }
 
-const aim = (x) => {
+const aim = (x, z) => {
     setTimeout(() => {
-        aimed(x)
+        console.log(x)
+        aimed(z)
         x.aimBonus +=2;
         gameMessage.innerText = "Looks like " + x.name + " is taking aim!  " + x.aimBonus;
-        console.log(x)
     }, 1000); 
 }
 
-const cocaine = (x) => {
+const cocaine = (x, z) => {
     setTimeout(() => {
-        snorted(x)
+        console.log(x)
+        snorted(z)
         x.combat += 2;
         x.str += 2;
         x.health += 5;
         gameMessage.innerText = x.name + " took a bump!"
-        console.log(x)
+        
     }, 800);
 }
 
@@ -702,8 +703,8 @@ const badAi = () =>{
         setTimeout(() => {
             let picker = versus[y].actions.length +1;
             let i = randN(picker) -1;
-            versus[y].actions[i](versus[y])
-            console.log(y)
+            versus[y].actions[i](versus[y], y)
+            //console.log(y)
         }, 1000 + (1700 * y));
     }
     for (y = 0; y < versus.length; y++) {
