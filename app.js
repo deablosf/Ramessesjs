@@ -80,37 +80,37 @@ class BossEnemy {
 const enemyNames = [
     {
         name: "Wrath", 
-        image: "url('assets/Enemy1.jpg')",
+        image: "url('./assets/Enemy1.jpg')",
         snaps: ["You broke in, so you brought this on yourself. Remember that in the ER, boy.", "What the? Get out! Get out of here, now! I’ll kill you!", "I saw what you did to those others, putting down a mad dog like you is the cherry on my day.", "I’d rip them apart if I could reach them, leaving me behind? Me? ARGH, why?!"]
     }, 
     {
         name: "Gluttony", 
-        image: "url('assets/enemy2.png')",
+        image: "url('./assets/enemy2.png')",
         snaps: ["I could have gone too but I needed just one more…why don’t they get it?", "I can let you go, you know...hey is that brown sugar? Give it to me and you won’t have to get hurt.", "I just had some brown sugar. No, wait! Do you have some brown sugar? Give me yours!", "Empty those pockets, boy, put it all in the bag and I might just let you leave here in one piece."]
     }, 
     {
         name: "Lust", 
-        image: "url('assets/enemy3.jpg')",
+        image: "url('./assets/enemy3.jpg')",
         snaps: ["Look at you, more crafted than born. How’d you get to look so...mmm...good?", "It’s not fair, why leave me behind? Just take a look at me and tell me you don’t want this with you.", "I shouldn’t be here, I should be far away with a face between my legs.", "I don’t want to fight, but I do like it when it gets rough."]
     }, 
     {
         name: "Pride", 
-        image: "url('assets/enemy4.jpg')",
+        image: "url('./assets/enemy4.jpg')",
         snaps: ["Cute, you got a little stick. This here? This is a real weapon.", "Had a bit of luck getting here huh? Luck ran out when you met me, boy.", "I didn’t get left behind like the rest of these sad sacks, I stayed behind because they needed guidance and strength. They need me. They. Need. Me.", "Take a swing, boy, think of it as giving you a chance."]
     }, 
     {
         name: "Avarus", 
-        image: "url('assets/enemy5.jpg')",
+        image: "url('./assets/enemy5.jpg')",
         snaps: ["I’m glad they left me behind, how could I leave such cool stuff anyway?", "I knew the moment I saw you, you got what I need but you won’t give it willingly will you? Guess I have to take it.", "I could let you go, we got what we needed but a bonus couldn’t hurt and I want more.", "Stay back, this here is mine, there’s just not enough to share, don’t you get it?!"]
     }, 
     {
         name: "Envy", 
-        image: "url('assets/enemy6.jpg')",
+        image: "url('./assets/enemy6.jpg')",
         snaps: ["That’s a real nice bat, too good for someone like you. Give it here, I said give it!", "I can’t believe she got to go instead of me, she was a whore and always in everyone else’s trash. Not one of them deserved to go more than me, not one.", "Why fight us for him? I never had a friend like that. If I take you out though, he won’t have a friend like that either.", "Look at those abs, it’s not fair, I should have abs like that. At least I won’t have your hospital bills."]
     }, 
     {
         name: "Sloth", 
-        image: "url('assets/enemy7.jpg')",
+        image: "url('./assets/enemy7.jpg')",
         snaps: ["Wait, do we even have to do this? Can’t you just, you know, leave?", "Just tap me hard enough to bruise so it looks like I really put up a fight.", "I could have gone too, I really could have, I heard the call but I figured they would come and get me.", "If I stop you here, it ends but that’s a lot of work…"]
     }
 ]
@@ -118,7 +118,7 @@ const enemyNames = [
 const bossNames = [
     {
         name: "RoadKill",
-        image: "url('assets/boss1.png')",
+        image: "url('./assets/boss1.png')",
         snaps: ["So you're guy Ruby was screaming about; the friend of that disrespectful asshole and the guy that burned down Grustigies Arcade. "]
     }
 ]
@@ -741,13 +741,13 @@ const badAi = () =>{
             versus[y].health -= (2)
             gameMessage.innerText = versus[y].name + " is Bleeding! " + versus[y].health;
             if (y == 1) {
-                eneStat3.style.backgroundImage = "url('assets/blood.png')";
+                eneStat3.style.backgroundImage = "url('./assets/blood.png')";
             };
             if (y == 0 && versus.length == 1) {
-                eneStat1.style.backgroundImage = "url('assets/blood.png')";
+                eneStat1.style.backgroundImage = "url('./assets/blood.png')";
             };
             if (y == 0 && versus.length == 2) {
-                eneStat2.style.backgroundImage = "url('assets/blood.png')";
+                eneStat2.style.backgroundImage = "url('./assets/blood.png')";
             };       
         };
        delay(y)
@@ -769,6 +769,7 @@ const streetSweeper = () => {
     healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     if (versus.length == 1) {
         if (isGameOver(versus[0].health)){
+                enemyImage.style.display="none";
                 endFight("Ramesses Wins")
                 return
             }
@@ -777,19 +778,25 @@ const streetSweeper = () => {
                 versus.pop();
                 enemyImage.removeAttribute("style");
                 eneAct1.removeAttribute("style");
+                eneStat1.removeAttribute("style");
                 enemyImage1.style.display="none";
                 enemyImage2.style.display="none";
                 eneAct2.style.display="none";
                 eneAct3.style.display="none";
+                eneStat2.style.display="none";
+                eneStat3.style.display="none";
                 enemyImage.style.backgroundImage = versus[0].image;
         }  else if (versus[0].health <= 0){
                 versus.shift();
                 enemyImage.removeAttribute("style");
                 eneAct1.removeAttribute("style");
+                eneStat1.removeAttribute("style");
                 enemyImage1.style.display="none";
                 enemyImage2.style.display="none";
                 eneAct2.style.display="none";
                 eneAct3.style.display="none";
+                eneStat2.style.display="none";
+                eneStat3.style.display="none";
                 enemyImage.style.backgroundImage = versus[0].image;
         } 
         }
@@ -1247,6 +1254,7 @@ const textNodes = [
         id: 19,
         text: "",
         sideEffect: () => {
+            bGI.style.backgroundColor = "white"
             startGame()
         },
         options: [
