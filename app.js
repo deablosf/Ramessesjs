@@ -189,6 +189,9 @@ let healthNumber1 = document.getElementById('healthNumOOC');
 let eneAct1 = document.getElementById('eneact1');
 let eneAct2 = document.getElementById('eneact2');
 let eneAct3 = document.getElementById('eneact3');
+let eneStat1 = document.getElementById('enestat1');
+let eneStat2 = document.getElementById('enestat2');
+let enestat3 = document.getElementById('enestat3');
 
 // ----------------- Visuals (OOC)
 let bGI = document.getElementById('screenOOC');
