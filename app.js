@@ -189,9 +189,9 @@ let healthNumber1 = document.getElementById('healthNumOOC');
 let eneAct1 = document.getElementById('eneact1');
 let eneAct2 = document.getElementById('eneact2');
 let eneAct3 = document.getElementById('eneact3');
-let eneStat1 = document.getElementById('enestat1');
-let eneStat2 = document.getElementById('enestat2');
-let enestat3 = document.getElementById('enestat3');
+let eneStat1 = document.getElementById('bleeding1');
+let eneStat2 = document.getElementById('bleeding2');
+let eneStat3 = document.getElementById('bleeding3');
 
 // ----------------- Visuals (OOC)
 let bGI = document.getElementById('screenOOC');
@@ -675,7 +675,7 @@ const brownBetty = (x) => {
     }
 }
 
-const bandage = (X) => {
+const bandage = (x) => {
 
 }
 
@@ -739,7 +739,16 @@ const badAi = () =>{
         if (versus[y].bleeding == true){
             console.log(versus[y].name + " is Bleeding!")
             versus[y].health -= (2)
-            gameMessage.innerText = versus[y].name + " is Bleeding! " + versus[y].health;        
+            gameMessage.innerText = versus[y].name + " is Bleeding! " + versus[y].health;
+            if (y == 1) {
+                eneStat3.style.backgroundImage = "url('assets/blood.png')";
+            };
+            if (y == 0 && versus.length == 1) {
+                eneStat1.style.backgroundImage = "url('assets/blood.png')";
+            };
+            if (y == 0 && versus.length == 2) {
+                eneStat2.style.backgroundImage = "url('assets/blood.png')";
+            };       
         };
        delay(y)
             
@@ -804,6 +813,7 @@ let fight = () => {
         eneAct3.removeAttribute("style");
         enemyImage.style.display="none";
         eneAct1.style.display="none";
+        eneStat1.style.display="none"
         enemyImage1.style.backgroundImage = versus[0].image;
         enemyImage2.style.backgroundImage = versus[1].image;
         gameMessage.innerText = versus[0].snaps[randN0(4)];
@@ -811,12 +821,16 @@ let fight = () => {
     } else {
         enemyImage.removeAttribute("style");
         eneAct1.removeAttribute("style");
+        eneStat1.removeAttribute('style');
         enemyImage1.style.display="none";
         enemyImage2.style.display="none";
-        enemyImage.style.backgroundImage = versus[0].image;
-        gameMessage.innerText = versus[0].snaps[randN0(4)];  
         eneAct2.style.display="none";
         eneAct3.style.display="none";
+        eneStat2.style.display="none";
+        eneStat3.style.display="none";
+        enemyImage.style.backgroundImage = versus[0].image;
+        gameMessage.innerText = versus[0].snaps[randN0(4)];  
+        
     }
 }
 

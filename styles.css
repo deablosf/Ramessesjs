@@ -151,6 +151,8 @@ span{
     grid-template-rows: 20% 20% 20% 20% 20%;
 }
 
+/* Enenmy boxes  */
+
 #eneact1 {
     width: 12vw;
     height: 12vh;
@@ -173,10 +175,62 @@ span{
     justify-self: center;
 }
 
+#enestat1 {
+    width: 5vw;
+    height: 20vh;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+}
+
+#bleeding1{
+    width: 5vw;
+    height: 6vh;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    background-size: 100%;
+}
+
+#enestat2 {
+    width: 5vw;
+    height: 20vh;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+}
+
+#bleeding2{
+    width: 5vw;
+    height: 6vh;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    background-size: 100%;
+}
+
+#enestat3 {
+    width: 5vw;
+    height: 20vh;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+}
+
+#bleeding3{
+    width: 5vw;
+    height: 6vh;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    background-size: 100%;
+}
+
 .enemy{
     width: 30vw;
     height: 60vh;
     grid-column: 3;
+    grid-row: 1;
     justify-self: center;
     background-size: 100% 100%;
 }
@@ -284,7 +338,7 @@ span{
     height: 30vh;
     background-image: url(assets/explore_graf.jpeg);
     background-size: 100% 100%;
-    background-cflexolor: gold;
+    background-color: gold;
     background-blend-mode: darken;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
@@ -453,21 +507,7 @@ span{
     0% {
         transform: translateY(0px) rotateY(0deg);
     }
-    5% {
-        transform: translateY(-10px) ;
-    }
-    10% {
-        transform: translateY(-20px) ;
-    }
-    15% {
-        transform: translateY(-30px) ;
-    }
-    20% {
-        transform: translateY(-20px) ;
-    }
-    25% {
-        transform: translateY(-10px) ;
-    }
+
     30% {
         transform: translateY(0px) rotateY(360deg);
     }
