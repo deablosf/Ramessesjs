@@ -512,3 +512,26 @@ span{
         transform: translateY(0px) rotateY(360deg);
     }
   }
+
+  .ghosts {
+      animation: ghosts 2.8s;
+      animation-iteration-count: infinite;
+  }
+
+  @keyframes ghosts {
+      0% {
+        transform: translateY(20px); opacity: 0.1;
+      }
+      25% {
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(60px); opacity: 0.1;
+      }
+      75% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(20px); opacity: 0.1;
+      }
+  }

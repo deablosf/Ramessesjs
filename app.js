@@ -1012,7 +1012,7 @@ const textNodes = [
         text: "Their dojo Master Teacher See Foo commands Ramesses and his remaining oath brother, “Anchor of the Unmoored kingdom“ to stay in the orphanage dojo; “Anyone weak enough to be taken deserves their fate” he says.",
         sideEffect: () => {
             npcs.style.backgroundImage = "url('assets/Shifu.jpg')"
-            npcs.style.opacity = "0.6";
+            npcs.classList.add("ghosts");
         },
         options: [
             {
@@ -1026,6 +1026,7 @@ const textNodes = [
         text: "Ignoring their master’s words, the two of them head to the abandoned Harriet Stowe Housing community or what the local’s called “Tomny’s Projects”. They will face off against the Raptures Wronged to get their brother back or die trying. Ramesses- 'I told you that you didn’t have to come, see foo’s gonna come down on me for this'.",
         sideEffect: () => {
             npcs.style.backgroundImage = "none"
+            npcs.classList.remove("ghosts");
             bGI.style.backgroundImage = "url('assets/mainbuilding.png')";
         },
         options: [
