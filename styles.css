@@ -520,18 +520,41 @@ span{
 
   @keyframes ghosts {
       0% {
-        transform: translateY(20px); opacity: 0.1;
+        transform: translateY(20px); opacity: 0.4;
       }
       25% {
-        opacity: 0.3;
+        opacity: 0.1;
       }
       50% {
-        transform: translateY(60px); opacity: 0.1;
+        transform: translateY(60px); opacity: 0.3;
       }
       75% {
-        opacity: 0.3;
+        opacity: 0.1;
       }
       100% {
-        transform: translateY(20px); opacity: 0.1;
+        transform: translateY(20px); opacity: 0.4;
       }
   }
+
+  .screenOOC { 
+    
+    animation: fadeInAnimation ease 5s;
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    
+} 
+
+.textBoox{
+    animation: fadeInAnimation ease 8s;
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+}
+  
+@keyframes fadeInAnimation { 
+    0% { 
+        opacity: 0; 
+    } 
+    100% { 
+        opacity: 1; 
+     } 
+} 

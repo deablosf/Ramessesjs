@@ -193,34 +193,6 @@ let eneStat1 = document.getElementById('bleeding1');
 let eneStat2 = document.getElementById('bleeding2');
 let eneStat3 = document.getElementById('bleeding3');
 
-// ----------------- Visuals (OOC)
-let bGI = document.getElementById('screenOOC');
-let npcs = document.getElementById('person');
-const textElement = document.getElementById('text');
-const optionButtonsElement = document.getElementById('selectBox')
-
-const roomRevisit = () => {
-    if (state.currentRoom == 9) {
-        if (state.firstRoom == false) {
-            setTimeout(() => {
-                glassBreakSFX()
-                npcs.style.backgroundImage = "url('assets/Ruby.jpg')"
-            }, 1250);
-        }  
-    } 
-    if (state.firstRoom == true) {
-        textNodes[7].options[0].nextText = 17;
-    }
-    
-    if (state.secondRoom == true) {
-        textNodes[7].options[1].nextText = 18;
-    }
-    
-}
-//element.classList.add("my-class");
-//element.classList.remove("my-class");
-
-
 const damageAni = () => {
     hitSFX1()
     if (versus.length == 2) {
@@ -424,7 +396,43 @@ const snorted = (x) => {
             }, 1500);
     }
 }
+// ----------------- Visuals (OOC)
+let bGI = document.getElementById('screenOOC');
+let npcs = document.getElementById('person');
+const textElement = document.getElementById('text');
+const optionButtonsElement = document.getElementById('selectBox')
 
+const roomRevisit = () => {
+    if (state.currentRoom == 9) {
+        if (state.firstRoom == false) {
+            setTimeout(() => {
+                glassBreakSFX()
+                npcs.style.backgroundImage = "url('assets/Ruby.jpg')"
+            }, 1250);
+        }  
+    } 
+    if (state.firstRoom == true) {
+        textNodes[7].options[0].nextText = 17;
+    }
+    
+    if (state.secondRoom == true) {
+        textNodes[7].options[1].nextText = 18;
+    }
+    
+}
+//element.classList.add("my-class");
+//element.classList.remove("my-class");
+
+const fadeInSceneChange = () => {
+    bGI.classList.add("screenOOC")
+    setTimeout(() => {
+        bGI.classList.remove("screenOOC")
+    }, 5500);
+    textElement.classList.add("textBoox")
+    setTimeout(() => {
+        textElement.classList.remove("textBoox")
+    }, 8500);
+}
 
 // ------------- AUDIO
 
@@ -921,6 +929,7 @@ let state = {
 
 const startGame = () => {
     grandMaster()
+    fadeInSceneChange()
     document.getElementById("combat").style.display="none";
     document.getElementById("startScreen").style.display="none";
     document.getElementById("ooc").removeAttribute("style");
@@ -1025,6 +1034,7 @@ const textNodes = [
         id: 4,
         text: "Ignoring their master’s words, the two of them head to the abandoned Harriet Stowe Housing community or what the local’s called “Tomny’s Projects”. They will face off against the Raptures Wronged to get their brother back or die trying. Ramesses- 'I told you that you didn’t have to come, see foo’s gonna come down on me for this'.",
         sideEffect: () => {
+            fadeInSceneChange()
             npcs.style.backgroundImage = "none"
             npcs.classList.remove("ghosts");
             bGI.style.backgroundImage = "url('assets/mainbuilding.png')";
