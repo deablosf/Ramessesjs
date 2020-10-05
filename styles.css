@@ -536,7 +536,7 @@ span{
       }
   }
 
-  .screenOOC { 
+ .screenOOC { 
     
     animation: fadeInAnimation ease 5s;
     animation-iteration-count: 1; 
@@ -556,5 +556,20 @@ span{
     } 
     100% { 
         opacity: 1; 
+     } 
+} 
+
+.win {
+    animation: won ease 1s;
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards;
+}
+
+@keyframes won { 
+    0% { 
+        opacity: 1; 
+    } 
+    100% { 
+        opacity: 0; 
      } 
 } 

@@ -396,6 +396,31 @@ const snorted = (x) => {
             }, 1500);
     }
 }
+
+const defeatedFoe = (x) => {
+    if (x == 1) {
+            eneAct3.classList.add("win")
+            setTimeout(() => {
+                eneAct3.classList.remove("win")
+            }, 1500);
+        }
+
+    if (x == 0 && versus.length == 2) {
+            eneAct2.classList.add("win")
+            setTimeout(() => {
+                eneAct2.classList.remove("win")
+            }, 1500);
+        
+    }  
+    
+    if (versus.length == 1) {
+        eneAct1.classList.add("win")
+            setTimeout(() => {
+                eneAct1.classList.remove("win")
+            }, 1500);
+    }
+}
+
 // ----------------- Visuals (OOC)
 let bGI = document.getElementById('screenOOC');
 let npcs = document.getElementById('person');
@@ -946,8 +971,6 @@ const startGame = () => {
         thirdRoom: false
     }
 }
-
-
 
 let showTextNode = (textNodeIndex) => {
     const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
