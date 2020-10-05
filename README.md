@@ -7,3 +7,9 @@
 *timing for combat messages are either take too long or goby too fast
 
 *
+
+
+## Things to add 
+*Action menu 
+
+*Item Menu(in combat maybe)
