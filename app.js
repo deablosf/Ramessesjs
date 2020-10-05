@@ -398,23 +398,23 @@ const snorted = (x) => {
 }
 
 const defeatedFoe = (x) => {
-    if (x == 1) {
-            eneAct3.classList.add("win")
+    if (x == 3) {
+            enemyImage2.classList.add("win")
             setTimeout(() => {
                 eneAct3.classList.remove("win")
             }, 1500);
         }
 
-    if (x == 0 && versus.length == 2) {
-            eneAct2.classList.add("win")
+    if (x == 2) {
+            enemyImage1.classList.add("win")
             setTimeout(() => {
                 eneAct2.classList.remove("win")
             }, 1500);
         
     }  
     
-    if (versus.length == 1) {
-        eneAct1.classList.add("win")
+    if (x == 1) {
+        enemyImage.classList.add("win")
             setTimeout(() => {
                 eneAct1.classList.remove("win")
             }, 1500);
@@ -802,13 +802,20 @@ const streetSweeper = () => {
     healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     if (versus.length == 1) {
         if (isGameOver(versus[0].health)){
-                enemyImage.style.display="none";
+                z = 1
+                defeatedFoe(z)
+                setTimeout(() => {
+                    enemyImage.style.display="none";
+                }, 1001);
                 endFight("Ramesses Wins")
                 return
             }
         } else if (versus.length == 2) {
             if (versus[1].health <= 0){
-                versus.pop();
+                z = 3
+                defeatedFoe(z)
+                setTimeout(() => {
+                    versus.pop();
                 enemyImage.removeAttribute("style");
                 eneAct1.removeAttribute("style");
                 eneStat1.removeAttribute("style");
@@ -819,8 +826,13 @@ const streetSweeper = () => {
                 eneStat2.style.display="none";
                 eneStat3.style.display="none";
                 enemyImage.style.backgroundImage = versus[0].image;
+                }, 1000);
+                
         }  else if (versus[0].health <= 0){
-                versus.shift();
+                z = 2
+                defeatedFoe(z)
+                setTimeout(() => {
+                    versus.shift();
                 enemyImage.removeAttribute("style");
                 eneAct1.removeAttribute("style");
                 eneStat1.removeAttribute("style");
@@ -831,6 +843,8 @@ const streetSweeper = () => {
                 eneStat2.style.display="none";
                 eneStat3.style.display="none";
                 enemyImage.style.backgroundImage = versus[0].image;
+                }, 1000);
+                
         } 
         }
         
@@ -910,7 +924,7 @@ const attack = (x) => {
 
     setTimeout(() => {
         gameMessage.innerText = "opponent is about to strike!"
-    }, 1250);
+    }, 1050);
     setTimeout(() => {
         badAi()
         streetSweeper()
@@ -918,7 +932,7 @@ const attack = (x) => {
             endgame("game Over")
         return
         }
-    }, 2000);
+    }, 1800);
     if (Ramesses.bleeding == true) {
         Ramesses.health -= Math.floor(Ramesses.tough / 2)
         gameMessage.innerText = "Your losing blood " + Ramesses.health;
@@ -935,7 +949,7 @@ const endFight = (message) => {
         document.getElementById("ooc").removeAttribute("style");
         document.getElementById("combat").style.display="none";
         versus.shift()
-        showTextNode(nextTextNodeId++)
+        showTextNode(nextTextNodeId ++)
         
     }, 7000);
     document.getElementsByClassName('attack-btn').hidden = true;
