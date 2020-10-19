@@ -560,7 +560,7 @@ span{
 } 
 
 .win {
-    animation: won ease 1s;
+    animation: won ease 0.8s;
     animation-iteration-count: 1; 
     animation-fill-mode: forwards;
 }

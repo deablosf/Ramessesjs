@@ -7,7 +7,7 @@
 
 
 // THings left to build
-// Miss animation for enemies and player, game over screen, redo the continue music, improve item box, make the attack options look better, 
+// game over screen, improve item box, make the attack options look better, 
 
 //--------------------- Section 01
 // ------ Character Sheets! -------
@@ -401,14 +401,14 @@ const defeatedFoe = (x) => {
     if (x == 3) {
             enemyImage2.classList.add("win")
             setTimeout(() => {
-                eneAct3.classList.remove("win")
+                enemyImage2.classList.remove("win")
             }, 1500);
         }
 
     if (x == 2) {
             enemyImage1.classList.add("win")
             setTimeout(() => {
-                eneAct2.classList.remove("win")
+                enemyImage1.classList.remove("win")
             }, 1500);
         
     }  
@@ -416,7 +416,7 @@ const defeatedFoe = (x) => {
     if (x == 1) {
         enemyImage.classList.add("win")
             setTimeout(() => {
-                eneAct1.classList.remove("win")
+                enemyImage.classList.remove("win")
             }, 1500);
     }
 }
