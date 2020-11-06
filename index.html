@@ -10,7 +10,7 @@
 <body>
 
 <!-- ________________ START SCREEN _______________ -->
-    <button class="start" onclick="startGame()">
+    <!-- <button class="start" onclick="startGame()">
     <div id="startScreen" class="">
         
         <div class="letters">
@@ -21,7 +21,7 @@
             <span>T</span>
         </div>
         <div class="boom"> <img src="./assets/boombox.gif"/>  </div>
-    </div></button>
+    </div></button> -->
 
 
 
@@ -59,7 +59,7 @@
 
 <!-- _________  COMBAT SCREEN____________ -->
 
-    <div id="combat" class="main" style="display: none;">
+    <div id="combat" class="main" >
         <div id="screen">
             <div id="ene1" class="enemy" onclick="enemySelect()"></div>
             <div id="ene2" class="enemy1" onclick="enemySelect1()"></div>
@@ -84,6 +84,7 @@
                 <button class="attack" onclick="attack(violentThrust)">Violent Thrust</button>
                 <button class="attack" onclick="attack(ravanaBackHand)">Ravana BackHand</button>
                 <button class="attack" onclick="attack(thirstyBat)">Thirsty Bat</button>
+                <div id="actionBox"></div>
             </div>
             <div class="inventory">
                 <div id="items" class="item1" onclick="brownBetty(usedItem)"></div>

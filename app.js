@@ -192,6 +192,7 @@ let eneAct3 = document.getElementById('eneact3');
 let eneStat1 = document.getElementById('bleeding1');
 let eneStat2 = document.getElementById('bleeding2');
 let eneStat3 = document.getElementById('bleeding3');
+let skillBox = document.getElementById('actionBox');
 
 const damageAni = () => {
     hitSFX1()
@@ -418,6 +419,16 @@ const defeatedFoe = (x) => {
             setTimeout(() => {
                 enemyImage.classList.remove("win")
             }, 1500);
+    }
+}
+
+const skillBoxFlap = () => {
+    if (state.skillFlap == 1) {
+        skillBox.classList.add("actionBox");
+        state.skillFlap = 2;
+    }else if (state.skillFlap == 2) {
+        skillBox.classList.remove("actionBox");
+        state.skillFlap = 1;
     }
 }
 
@@ -963,7 +974,8 @@ const endFight = (message) => {
 let state = {
     firstRoom: false,
     secondRoom: false,
-    thirdRoom: false
+    thirdRoom: false,
+    skillFlap: 1
 }
 
 const startGame = () => {
@@ -982,7 +994,8 @@ const startGame = () => {
         currentRoom: '',
         firstRoom: false,
         secondRoom: false,
-        thirdRoom: false
+        thirdRoom: false,
+        skillFlap: 1
     }
 }
 
