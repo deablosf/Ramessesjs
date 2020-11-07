@@ -319,16 +319,28 @@ span{
     background-size: 100% 100%;
     background-color: gold;
     background-blend-mode: darken;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    /* display: flex;
+    flex-direction: column; */
 }
 
-.attack{
+#attack{
     width: 12vw;
-    font-size: 18px;
+    height: 4vh;
+    font-size: 14px;
 }
 
-.attack:hover{
+.skills{
+    grid-row: 2;
+}
+
+.items{
+    grid-row: 3;
+}
+
+#attack:hover{
     color: gold;
 }
 
@@ -376,7 +388,22 @@ span{
 
 }
 
+.actionBoxClosed{
+    display: none;
+}
+
 .actionBox{
+    grid-column: 2;
+    border: solid black;
+    width: 35vw;
+    height: 29vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url(assets/focus_graff.jpeg);
+    background-size: 100% 100%;
+    background-color: silver;
+    background-blend-mode: darken;
+    
     
 }
 
