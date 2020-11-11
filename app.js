@@ -7,7 +7,7 @@
 
 
 // THings left to build
-// game over screen, improve item box, make the attack options look better, 
+// game over screen, clean up visuals, 
 
 //--------------------- Section 01
 // ------ Character Sheets! -------
@@ -178,21 +178,22 @@ let randN0 = (max) => {
 // --------------------
 // ----------------- Visuals (Combat)
 const combatScreen = document.getElementById('screen');
-let enemyImage = document.getElementById('ene1');
-let enemyImage1 = document.getElementById('ene2');
-let enemyImage2 = document.getElementById('ene3');
-let gameMessage = document.getElementById('textbox');
-let itemNumber = document.getElementById('itemnum');
-let itemNumberCombat = document.getElementById('itemnumcom')
-let healthNumber = document.getElementById('healthNum');
-let healthNumber1 = document.getElementById('healthNumOOC');
-let eneAct1 = document.getElementById('eneact1');
-let eneAct2 = document.getElementById('eneact2');
-let eneAct3 = document.getElementById('eneact3');
-let eneStat1 = document.getElementById('bleeding1');
-let eneStat2 = document.getElementById('bleeding2');
-let eneStat3 = document.getElementById('bleeding3');
-let skillBox = document.getElementById('actionBox');
+const enemyImage = document.getElementById('ene1');
+const enemyImage1 = document.getElementById('ene2');
+const enemyImage2 = document.getElementById('ene3');
+const gameMessage = document.getElementById('textbox');
+const itemNumber = document.getElementById('itemnum');
+const itemNumberCombat = document.getElementById('itemnumcom')
+const healthNumber = document.getElementById('healthNum');
+const healthNumber1 = document.getElementById('healthNumOOC');
+const eneAct1 = document.getElementById('eneact1');
+const eneAct2 = document.getElementById('eneact2');
+const eneAct3 = document.getElementById('eneact3');
+const eneStat1 = document.getElementById('bleeding1');
+const eneStat2 = document.getElementById('bleeding2');
+const eneStat3 = document.getElementById('bleeding3');
+const skillBox = document.getElementById('actionBox');
+const itemBox = document.getElementById('itemBox');
 
 const damageAni = () => {
     hitSFX1()
