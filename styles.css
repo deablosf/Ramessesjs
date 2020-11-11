@@ -300,7 +300,7 @@ span{
 }
 
 #healthcnt{
-    color: aliceblue;
+    color: floralwhite;
 }
 
 #healthNum{
@@ -330,6 +330,13 @@ span{
     width: 12vw;
     height: 4vh;
     font-size: 14px;
+}
+
+#skillz{
+    width: 12vw;
+    height: 4vh;
+    font-size: 14px;
+    margin-bottom: .5vh;
 }
 
 .skills{
@@ -403,8 +410,23 @@ span{
     background-size: 100% 100%;
     background-color: silver;
     background-blend-mode: darken;
-    
-    
+}
+
+.itemBoxClosed{
+    display: none;
+}
+
+.itemBox{
+    grid-column: 2;
+    border: solid black;
+    width: 35vw;
+    height: 29vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url(assets/focus_graff.jpeg);
+    background-size: 100% 100%;
+    background-color: gold;
+    background-blend-mode: darken;
 }
 
 
