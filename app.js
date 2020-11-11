@@ -734,7 +734,7 @@ const usedItem = () => {
 
 const brownBetty = (x) => {
     if (Ramesses.health == Ramesses.orighealth){
-        gameMessage.innerText = "Already in top shape, not need to Over Do it."
+        gameMessage.innerText = "Already in top shape, no need to Over Do it."
         console.log()
     } else if (Ramesses.health + 5 > Ramesses.orighealth) {
         snortSFX()
