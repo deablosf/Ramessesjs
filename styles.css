@@ -61,6 +61,7 @@ span{
 
 .main{
     border: solid antiquewhite;
+    background-color: black;
     width: 80vw;
     height: 91vh;
 }
@@ -293,7 +294,7 @@ span{
     align-items: center;
     font-size: 24px;
     font-weight: 600;
-    background-image: url(assets/doubt_griff.jpg);
+    background-image: url(assets/doubt_griff.jpg); opacity: .8;
     background-size: 100% 100%;
     background-color: gold;
     background-blend-mode: darken;

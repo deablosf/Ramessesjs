@@ -423,6 +423,9 @@ const defeatedFoe = (x) => {
 }
 
 const skillBoxFlap = () => {
+    if (state.itemFlap == 2) {
+        itemBoxFlap()
+    };
     if (state.skillFlap == 1) {
         skillBox.classList.remove("actionBoxClosed");
         skillBox.classList.add("actionBox");
@@ -431,6 +434,35 @@ const skillBoxFlap = () => {
         skillBox.classList.remove("actionBox");
         skillBox.classList.add("actionBoxClosed");
         state.skillFlap = 1;
+    }
+}
+
+const itemBoxFlap = () => {
+    if (state.skillFlap == 2) {
+        skillBoxFlap()
+    };
+    if (state.itemFlap == 1) {
+        itemBox.classList.remove("itemBoxClosed");
+        itemBox.classList.add("itemBox");
+        state.itemFlap = 2;
+    }else if (state.itemFlap == 2) {
+        itemBox.classList.remove("itemBox");
+        itemBox.classList.add("itemBoxClosed");
+        state.itemFlap = 1;
+    }
+}
+
+const closeFlaps = () => {
+    if (state.skillFlap == 2) {
+        skillBox.classList.remove("actionBox");
+        skillBox.classList.add("actionBoxClosed");
+        state.skillFlap = 1;
+    }
+
+    if (state.itemFlap == 2) {
+        itemBox.classList.remove("itemBox");
+        itemBox.classList.add("itemBoxClosed");
+        state.itemFlap = 1;
     }
 }
 
@@ -601,7 +633,7 @@ let enemySelect2 = () => {
 // PLAYER ACTIONS ------------
 const clubStrike = () => { // Normal Player attack
     let swingAway = 2 + randN(Ramesses.combat)
-    skillBoxFlap();
+    closeFlaps();
     if (swingAway >= target.athl/2){
         target.health -= (4 + randN(Ramesses.str));
         damageAni()
@@ -616,7 +648,7 @@ const clubStrike = () => { // Normal Player attack
 
 const violentThrust = () => {  // lowers next attacks damage by 6 but adds athl to the attacks damage.
     let swingAway = 1 + randN(Ramesses.combat)
-    skillBoxFlap();
+    closeFlaps();
     if (swingAway >= target.athl/2){
         Ramesses.str += 6;
         gameMessage.innerText = "You get low, low-rider, turning your legs into high tention spring and let loose, launchin' yourself parallel to the floor right at that sucka!";
@@ -640,7 +672,7 @@ const violentThrust = () => {  // lowers next attacks damage by 6 but adds athl 
 
 const ravanaBackHand = () => { //multiple attacks 拉瓦那的反手, less chance of hitting after each strike. maybe a for loop
     let swingAway = 1 + randN(Ramesses.combat)
-    skillBoxFlap();
+    closeFlaps();
     let delay = (i) => {
         setTimeout(() => {
             damageAni()
@@ -662,7 +694,7 @@ target = 1;
 
 const thirstyBat = () => {
     let swingAway = 1 + randN(Ramesses.combat)
-    skillBoxFlap();
+    closeFlaps();
     if (swingAway >= target.athl/2){
         target.health -= (4);
         target.bleeding = true;
@@ -675,6 +707,7 @@ const thirstyBat = () => {
 }
 
 const usedItem = () => {
+    closeFlaps();
     gameMessage.innerText = "Item used ";
     target = 1;
     document.getElementById("ene1").style.border = "none";
@@ -981,7 +1014,8 @@ let state = {
     firstRoom: false,
     secondRoom: false,
     thirdRoom: false,
-    skillFlap: 1
+    skillFlap: 1,
+    itemFlap: 1
 }
 
 const startGame = () => {
@@ -1001,7 +1035,8 @@ const startGame = () => {
         firstRoom: false,
         secondRoom: false,
         thirdRoom: false,
-        skillFlap: 1
+        skillFlap: 1,
+        itemFlap: 1
     }
 }
 
