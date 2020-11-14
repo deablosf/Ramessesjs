@@ -491,8 +491,6 @@ const roomRevisit = () => {
     }
     
 }
-//element.classList.add("my-class");
-//element.classList.remove("my-class");
 
 const fadeInSceneChange = () => {
     bGI.classList.add("screenOOC")
@@ -526,6 +524,15 @@ let grandMaster = () => {
     battleMusic.currentTime = 0;
     music.play()
     flOneBoss.pause()
+    roundabout.pause()
+    roundabout.currentTime = 0;
+}
+let grandStop = () => {
+    battleMusic.pause()
+    battleMusic.currentTime = 0;
+    music.currentTime = 0;
+    flOneBoss.pause()
+    flOneBoss.currentTime = 0;
     roundabout.pause()
     roundabout.currentTime = 0;
 }
@@ -851,6 +858,9 @@ const isGameOver = (health) => {
 const streetSweeper = () => {
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
+    if (isGameOver(Ramesses.health)) {
+        
+    }
     if (versus.length == 1) {
         if (isGameOver(versus[0].health)){
                 z = 1
@@ -1007,6 +1017,14 @@ const endFight = (message) => {
     document.getElementById("continue-button").hidden = false;
 }
 
+const gameOver = () =>{
+    document.getElementById("ooc").style.display="none";
+    document.getElementById("combat").style.display="none";
+    versus = [];
+    grandStop()
+
+}
+
 // ---------------------
 // --------------- TEXT ADVENTURE
 // --------------------
@@ -1038,6 +1056,9 @@ const startGame = () => {
         thirdRoom: false,
         skillFlap: 1,
         itemFlap: 1
+    }
+    if (Ramesses.health < Ramesses.orighealth) {
+        Ramesses.health = Ramesses.orighealth;
     }
 }
 
@@ -1373,6 +1394,3 @@ const textNodes = [
 // ------ GAME START ---------
 // ---------------------------
 
-
-//startGame()
- //fight()
