@@ -348,6 +348,10 @@ span{
     grid-row: 3;
 }
 
+.invisBtn{
+    display: none;
+}
+
 #attack:hover{
     color: gold;
 }

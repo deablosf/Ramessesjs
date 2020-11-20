@@ -194,6 +194,21 @@ const eneStat2 = document.getElementById('bleeding2');
 const eneStat3 = document.getElementById('bleeding3');
 const skillBox = document.getElementById('actionBox');
 const itemBox = document.getElementById('itemBox');
+const attBtn = document.querySelectorAll("[id='attack']");
+let closed = () => {
+    if(state.attackBtn == 1) {
+        for(i = 0; i < attBtn.length; i++){
+            attBtn[i].style.display='none';
+        } 
+        state.attackBtn = 2
+    } else if(state.attackBtn == 2) {
+        for(i = 0; i < attBtn.length; i++){
+            attBtn[i].removeAttribute('style');
+        }
+        state.attackBtn = 1; 
+    }
+    
+}
 
 const damageAni = () => {
     hitSFX1()
@@ -730,7 +745,7 @@ const usedItem = () => {
         badAi()
         streetSweeper()
         if (isGameOver(Ramesses.health)) {
-            endgame("game Over")
+            endGame("game Over")
         return
         }
     }, 2000);
@@ -824,7 +839,7 @@ const badAi = () =>{
             let i = randN(picker) -1;
             versus[y].actions[i](versus[y], y)
             //console.log(y)
-        }, 1000 + (1700 * y));
+        }, 500 + (1700 * y));
     }
     for (y = 0; y < versus.length; y++) {
         if (versus[y].bleeding == true){
@@ -844,6 +859,9 @@ const badAi = () =>{
        delay(y)
             
     }
+    setTimeout(() => {
+        closed();
+    }, 500 + (1700 * versus.length));
     
 }
 
@@ -859,8 +877,9 @@ const streetSweeper = () => {
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     if (isGameOver(Ramesses.health)) {
-        
-    }
+            endGame("game Over")
+        return
+        }
     if (versus.length == 1) {
         if (isGameOver(versus[0].health)){
                 z = 1
@@ -976,6 +995,7 @@ const attack = (x) => {
     document.getElementById("ene1").style.border = "none";
     document.getElementById("ene2").style.border = "none";
     document.getElementById("ene2").style.border = "none";
+    closed()
     //Alter to check each enemies health, for loop based on versus length.
     // if (isGameOver(versus[0].health)){
     //     endFight("Ramesses Wins")
@@ -985,15 +1005,15 @@ const attack = (x) => {
 
     setTimeout(() => {
         gameMessage.innerText = "opponent is about to strike!"
-    }, 1050);
+    }, 900);
     setTimeout(() => {
         badAi()
         streetSweeper()
         if (isGameOver(Ramesses.health)) {
-            endgame("game Over")
+            endGame()
         return
         }
-    }, 1800);
+    }, 1300);
     if (Ramesses.bleeding == true) {
         Ramesses.health -= Math.floor(Ramesses.tough / 2)
         gameMessage.innerText = "Your losing blood " + Ramesses.health;
@@ -1009,6 +1029,7 @@ const endFight = (message) => {
         grandMaster()
         document.getElementById("ooc").removeAttribute("style");
         document.getElementById("combat").style.display="none";
+        closed();
         versus.shift()
         showTextNode(nextTextNodeId ++)
         
@@ -1017,11 +1038,12 @@ const endFight = (message) => {
     document.getElementById("continue-button").hidden = false;
 }
 
-const gameOver = () =>{
-    document.getElementById("ooc").style.display="none";
+const endGame = () =>{
+    grandStop();
+    document.getElementById("ooc").removeAttribute("style");
     document.getElementById("combat").style.display="none";
     versus = [];
-    grandStop()
+    showTextNode(99)
 
 }
 
@@ -1054,6 +1076,7 @@ const startGame = () => {
         firstRoom: false,
         secondRoom: false,
         thirdRoom: false,
+        attackBtn: 1,
         skillFlap: 1,
         itemFlap: 1
     }
@@ -1384,6 +1407,19 @@ const textNodes = [
         options: [
             {
                 text: "",
+                nextText: 17
+            }
+        ]
+    },
+    {
+        id: 19,
+        text: "GAME OVER",
+        sideEffect: () => {
+
+        },
+        options: [
+            {
+                text: "Continue ?",
                 nextText: 17
             }
         ]
