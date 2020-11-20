@@ -100,7 +100,10 @@ span{
 
 .btn {
     font-family: 'Times New Roman', Times, serif;
+    width: 16vw;
+    height: 6vh;
     font-size: 20px;
+    margin-bottom: .5vh;
     color: black;
 }
 

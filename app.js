@@ -432,8 +432,10 @@ const defeatedFoe = (x) => {
     
     if (x == 1) {
         enemyImage.classList.add("win")
+        eneStat1.classList.add("win")
             setTimeout(() => {
                 enemyImage.classList.remove("win")
+                eneStat1.classList.remove("win")
             }, 1500);
     }
 }
@@ -799,6 +801,10 @@ const attackR = (x, z) => {
         healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
         healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
         console.log("attack happened")
+        if (isGameOver(Ramesses.health)) {
+                endGame()
+            return
+            }
         }, 750);
         
     } else {
@@ -859,9 +865,14 @@ const badAi = () =>{
        delay(y)
             
     }
-    setTimeout(() => {
+    
+    if (versus.length > 0){
+        setTimeout(() => {
         closed();
     }, 500 + (1700 * versus.length));
+    }
+    
+    
     
 }
 
@@ -877,9 +888,9 @@ const streetSweeper = () => {
     healthNumber.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     healthNumber1.innerText = Ramesses.health + " / " + Ramesses.orighealth;
     if (isGameOver(Ramesses.health)) {
-            endGame("game Over")
-        return
-        }
+                endGame()
+            return
+            }
     if (versus.length == 1) {
         if (isGameOver(versus[0].health)){
                 z = 1
@@ -1003,17 +1014,16 @@ const attack = (x) => {
     // }
     streetSweeper()
 
-    setTimeout(() => {
-        gameMessage.innerText = "opponent is about to strike!"
-    }, 900);
-    setTimeout(() => {
-        badAi()
-        streetSweeper()
-        if (isGameOver(Ramesses.health)) {
-            endGame()
-        return
-        }
-    }, 1300);
+        if (versus.length > 0){
+        setTimeout(() => {
+            gameMessage.innerText = "opponent is about to strike!"
+        }, 900);
+    }
+        setTimeout(() => {
+            badAi()
+            streetSweeper()
+        }, 1300);
+    
     if (Ramesses.bleeding == true) {
         Ramesses.health -= Math.floor(Ramesses.tough / 2)
         gameMessage.innerText = "Your losing blood " + Ramesses.health;
@@ -1022,6 +1032,7 @@ const attack = (x) => {
 
 const endFight = (message) => {
     document.getElementById('textbox').innerText = message;
+    versus.shift();
     setTimeout(() => {
         document.getElementById('textbox').innerText = "Seefoo always say: " + seeFoo[randN0(7)]
     }, 900);
@@ -1030,12 +1041,8 @@ const endFight = (message) => {
         document.getElementById("ooc").removeAttribute("style");
         document.getElementById("combat").style.display="none";
         closed();
-        versus.shift()
-        showTextNode(nextTextNodeId ++)
-        
+        // showTextNode(nextTextNodeId ++)
     }, 7000);
-    document.getElementsByClassName('attack-btn').hidden = true;
-    document.getElementById("continue-button").hidden = false;
 }
 
 const endGame = () =>{
@@ -1043,7 +1050,7 @@ const endGame = () =>{
     document.getElementById("ooc").removeAttribute("style");
     document.getElementById("combat").style.display="none";
     versus = [];
-    showTextNode(99)
+    showTextNode(99);
 
 }
 
@@ -1060,6 +1067,9 @@ let state = {
 }
 
 const startGame = () => {
+    if (Ramesses.health < Ramesses.orighealth) {
+        Ramesses.health = Ramesses.orighealth;
+    }
     grandMaster()
     fadeInSceneChange()
     document.getElementById("combat").style.display="none";
@@ -1080,9 +1090,7 @@ const startGame = () => {
         skillFlap: 1,
         itemFlap: 1
     }
-    if (Ramesses.health < Ramesses.orighealth) {
-        Ramesses.health = Ramesses.orighealth;
-    }
+    
 }
 
 let showTextNode = (textNodeIndex) => {
@@ -1402,6 +1410,7 @@ const textNodes = [
         text: "",
         sideEffect: () => {
             bGI.style.backgroundColor = "white"
+            textElement.removeAttribute('style')
             startGame()
         },
         options: [
@@ -1412,15 +1421,16 @@ const textNodes = [
         ]
     },
     {
-        id: 19,
-        text: "GAME OVER",
+        id: 99,
+        text: "",
         sideEffect: () => {
-
+            bGI.style.backgroundImage = "url('assets/gameover.jpg')"
+            textElement.style.display=('none')
         },
         options: [
             {
                 text: "Continue ?",
-                nextText: 17
+                nextText: 19
             }
         ]
     }
