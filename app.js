@@ -7,7 +7,7 @@
 
 
 // THings left to build
-// game over screen, clean up visuals, 
+// clean up visuals, 
 
 //--------------------- Section 01
 // ------ Character Sheets! -------
